@@ -4,21 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ec42dae-2579-4d4f-9218-2d0835e74e1d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/View/view/AddProduct.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/View/view/MainMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/View/view/ModifyPart.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/View/view/ModifyProduct.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddPart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddProduct.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/MainMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyPart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyProduct.java" afterDir="false" />
+    <list default="true" id="5ec42dae-2579-4d4f-9218-2d0835e74e1d" name="Changes" comment="FMXL and Controllers added. Window creation started.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/View/view/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/View/view/MainMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/kbur/c482/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/View/view/AddPart.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +24,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="629dfb2f-90ff-4356-a5b7-571cc2ae9aa7" />
+        <option name="url" value="https://github.com/KelsDRK/Sotware1_Project.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -81,7 +83,19 @@
       <option name="presentableId" value="Default" />
       <updated>1694162001590</updated>
     </task>
+    <task id="LOCAL-00001" summary="FMXL and Controllers added. Window creation started.">
+      <created>1694224621796</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1694224621796</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="FMXL and Controllers added. Window creation started." />
+    <option name="LAST_COMMIT_MESSAGE" value="FMXL and Controllers added. Window creation started." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
