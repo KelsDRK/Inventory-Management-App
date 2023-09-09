@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/view/MainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 500
         );
-        stage.setTitle("Inventory Management System Application");
+        stage.setTitle("Inventory Management System");
         stage.setScene(scene);
         stage.show();
     }

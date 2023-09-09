@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ec42dae-2579-4d4f-9218-2d0835e74e1d" name="Changes" comment="FMXL and Controllers added. Window creation started.">
+    <list default="true" id="5ec42dae-2579-4d4f-9218-2d0835e74e1d" name="Changes" comment="09/09">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/View/view/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/View/view/MainMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/View/view/AddPart.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/AddPart.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/View/view/AddProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/AddProduct.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/View/view/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/MainMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/View/view/ModifyPart.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/ModifyPart.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/View/view/ModifyProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/ModifyProduct.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/MainMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,11 +30,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -54,15 +59,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_directory_selection": "C:/Users/kelst/Desktop/Projects/c482/src/main/View/kbur/c482/view",
-    "last_opened_file_path": "C:/Users/kelst/Desktop/Projects/c482/src/main/View/kbur/c482/CreateMainMenu.fxml",
-    "settings.editor.selected.configurable": "preferences.JavaFX"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/kelst/Desktop/Projects/c482/src/main/View/kbur/c482/view&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kelst/Desktop/Projects/c482/src/main/View/kbur/c482/CreateMainMenu.fxml&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kelst\Desktop\Projects\c482\src\main\View\kbur\c482" />
@@ -90,12 +95,20 @@
       <option name="project" value="LOCAL" />
       <updated>1694224621796</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="09/09">
+      <created>1694226627822</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1694226627822</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="FMXL and Controllers added. Window creation started." />
-    <option name="LAST_COMMIT_MESSAGE" value="FMXL and Controllers added. Window creation started." />
+    <MESSAGE value="09/09" />
+    <option name="LAST_COMMIT_MESSAGE" value="09/09" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
