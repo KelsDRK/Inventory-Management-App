@@ -5,17 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ec42dae-2579-4d4f-9218-2d0835e74e1d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/View/view/AddProduct.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/View/view/MainMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/View/view/ModifyPart.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/View/view/ModifyProduct.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddPart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/MainMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyPart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/kbur/c482/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/kbur/c482/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/kbur/c482/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/View/view/AddPart.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -33,9 +55,23 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_directory_selection": "C:/Users/kelst/Desktop/Projects/c482/src/main/View/kbur/c482/view",
+    "last_opened_file_path": "C:/Users/kelst/Desktop/Projects/c482/src/main/View/kbur/c482/CreateMainMenu.fxml",
+    "settings.editor.selected.configurable": "preferences.JavaFX"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kelst\Desktop\Projects\c482\src\main\View\kbur\c482" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kelst\Desktop\Projects\c482\src\main\View\view" />
+      <recent name="C:\Users\kelst\Desktop\Projects\c482\src\main\View\kbur\c482\view" />
+      <recent name="C:\Users\kelst\Desktop\Projects\c482\src\main\resources\kbur\c482" />
+      <recent name="C:\Users\kelst\Desktop\Projects\c482\src\main\resources" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -46,5 +82,9 @@
       <updated>1694162001590</updated>
     </task>
     <servers />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
