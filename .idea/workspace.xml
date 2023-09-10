@@ -4,15 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ec42dae-2579-4d4f-9218-2d0835e74e1d" name="Changes" comment="09/09">
+    <list default="true" id="5ec42dae-2579-4d4f-9218-2d0835e74e1d" name="Changes" comment="Buttons added to controller">
+      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/InHouse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Inventory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Outsourced.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Part.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/View/view/AddPart.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/AddPart.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/View/view/AddProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/AddProduct.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/View/view/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/MainMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/View/view/ModifyPart.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/ModifyPart.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/View/view/ModifyProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/ModifyProduct.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/view/AddPart.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/AddPart.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/view/AddProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/AddProduct.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/view/ModifyPart.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/ModifyPart.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/view/ModifyProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/ModifyProduct.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddPart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyPart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,13 +109,21 @@
       <option name="project" value="LOCAL" />
       <updated>1694226627822</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Buttons added to controller">
+      <created>1694295848968</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694295848968</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="FMXL and Controllers added. Window creation started." />
     <MESSAGE value="09/09" />
-    <option name="LAST_COMMIT_MESSAGE" value="09/09" />
+    <MESSAGE value="Buttons added to controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Buttons added to controller" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

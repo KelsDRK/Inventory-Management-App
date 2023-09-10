@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="kbur.c482.controller.AddPart">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-  </padding>
-
-  <Label fx:id="welcomeText"/>
-  <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kbur.c482.controller.AddPart">
+   <children>
+      <TextField fx:id="IdField" layoutX="276.0" layoutY="114.0" />
+      <TextField fx:id="NameField" layoutX="276.0" layoutY="150.0" />
+      <TextField fx:id="InvField" layoutX="276.0" layoutY="185.0" />
+      <Text layoutX="182.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+      <Text layoutX="182.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+      <Text layoutX="182.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inv" />
+      <Text layoutX="182.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price/Cost" />
+      <TextField fx:id="PriceCostField" layoutX="276.0" layoutY="219.0" />
+      <TextField fx:id="MaxField" layoutX="276.0" layoutY="256.0" />
+      <Text layoutX="182.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max" />
+      <TextField fx:id="MinField" layoutX="495.0" layoutY="256.0" />
+      <Text layoutX="444.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min" />
+      <TextField fx:id="MaschineID" layoutX="276.0" layoutY="288.0" />
+      <Text layoutX="182.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Machine ID" />
+      <Text layoutX="168.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Part">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <RadioButton fx:id="InHouseRadioButton" layoutX="276.0" layoutY="50.0" mnemonicParsing="false" text="In-Hosue" />
+      <RadioButton fx:id="OutsourcedRaioButton" layoutX="401.0" layoutY="50.0" mnemonicParsing="false" text="Outsourced" />
+      <Button fx:id="SaveButton" layoutX="276.0" layoutY="377.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="CancelButton" layoutX="375.0" layoutY="377.0" mnemonicParsing="false" onAction="#OnCancelAction" text="Cancel" />
+   </children>
+</AnchorPane>
