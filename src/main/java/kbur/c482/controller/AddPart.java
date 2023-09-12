@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import kbur.c482.model.Part;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,7 +19,6 @@ public class AddPart implements Initializable {
 
     }
 
-
     public void OnCancelAction(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
@@ -26,4 +26,8 @@ public class AddPart implements Initializable {
         stage.setTitle("Modify Product");
         stage.setScene(scene);
     }
+
+
+
+
 }
