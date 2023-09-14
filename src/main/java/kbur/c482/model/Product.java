@@ -29,6 +29,8 @@ public class Product extends Inventory {
         }
     }
 
+
+
     //Constructor
     public Product(int id, String name, double price, int stock, int max, int min) {
         this.id = id;
@@ -89,7 +91,8 @@ public class Product extends Inventory {
         this.max = max;
     }
 
-    public static ObservableList<Product> getAllProducts () {
+    /*public static ObservableList<Product> getAllProducts () {
         return allProducts;
     }
+     */
 }

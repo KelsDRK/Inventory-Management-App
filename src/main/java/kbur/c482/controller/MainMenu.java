@@ -1,5 +1,6 @@
 package kbur.c482.controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,14 +13,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Modality;
 
 import javafx.stage.Stage;
-import kbur.c482.model.Inventory;
-import kbur.c482.model.Part;
-import kbur.c482.model.Product;
+import javafx.stage.Window;
+import kbur.c482.model.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -54,8 +56,6 @@ public class MainMenu implements Initializable {
     private  ObservableList<Part> allParts = FXCollections.observableArrayList();
     private  ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
-    private Inventory inventory;
-
     public Button AddPartsButton;
     public Button ModifyPartsButton;
     public Button DeletePartsButton;
@@ -63,6 +63,8 @@ public class MainMenu implements Initializable {
     public Button AddProductsButton;
     public Button ModifyProductsButton;
     public Button DeleteProductsButton;
+
+    Inventory inv = new Inventory();
 
     public MainMenu() {
 
@@ -84,38 +86,71 @@ public class MainMenu implements Initializable {
         productInvLevelColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        //partIdColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        initialData(inv);
+
 
         ObservableList<Part> parts = Part.getAllParts();
-        PartsTable.setItems(parts);
+        PartsTable.setItems(Inventory.getAllParts());
 
         ObservableList<Product> products = Product.getAllProducts();
         ProductsTable.setItems(products);
-
-
-       /*( allParts.add(new Part(11, "Tool", 25.6, 5, 1, 4));
-        allParts.add(new Part(12, "Hammer", 24.0, 44, 4, 7));
-        allParts.add(new Part(13, "Wrench", 54.3, 3, 3, 8));
-        allParts.add(new Part(14, "Claw", 64.4, 6, 8, 23)); */
-
-        /*allProducts.add(new Product(35, "Ketchup", 3.00, 3, 1, 5));
-        allProducts.add(new Product(3, "Mustard", 6.00, 66, 1, 5));
-        allProducts.add(new Product(66, "BBq", 7.00, 76, 1, 5));
-        allProducts.add(new Product(10, "Ranch", 8.00, 4, 1, 5)); */
-
-
 
     }
 
 
 
     public void OnExitButtonClicked(ActionEvent actionEvent) {
-        System.out.println("Exit Button");
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Confirmation ");
+        alert.setHeaderText("Confirm Exit!");
+        alert.setContentText("Are you sure you want to exit?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            Platform.exit();
+        } else {
+            System.out.println("You clicked cancel. Please complete form.");
+        }
+    }
+
+    public void initialData (Inventory inventory) {
+        this.inv.setAllParts(inventory.getAllParts());
+        PartsTable.setItems(this.inv.getAllParts());
+
+    }
+
+    public void testData () {
+        InHousePart part1 =  new InHousePart(1, "Part 1", 24.35, 10, 4, 20, 10);
+        InHousePart part2 =  new InHousePart(2, "Part 2", 56.22, 5, 4, 20, 10);
+        InHousePart part3 =  new InHousePart(3, "Part 3", 12.46, 43, 4, 100, 10);
+        InHousePart part4 =  new InHousePart(4, "Part 4", 74.34, 24, 4, 50, 10);
+
+        OutsourcedPart pout1 = new OutsourcedPart(5, "Pout 1", 22.34, 25, 3, 4, "Company 1");
+        OutsourcedPart pout2 = new OutsourcedPart(6, "Pout 2", 12.44, 5, 4, 10, "Company 2");
+        OutsourcedPart pout3 = new OutsourcedPart(7, "Pout 3", 43.22, 25, 5, 50, "Company 3");
+        OutsourcedPart pout4 = new OutsourcedPart(8, "Pout 4", 16.95, 25, 1, 30, "Company 4");
+
+        inv.addInHousePart(part1);
+        inv.addInHousePart(part2);
+        inv.addInHousePart(part3);
+        inv.addInHousePart(part4);
+
+        inv.addOutsourcedPart(pout1);
+        inv.addOutsourcedPart(pout2);
+        inv.addOutsourcedPart(pout3);
+        inv.addOutsourcedPart(pout4);
+
     }
 
 
-    /*Search by part name is going to take in a String "partialname" and compare it to Part objects in the list "allParts" using the "getName" function from the class "Parts".
-    If there is a match then it will return the observable list  with the included Part (partialName) that we are looking at for comparison.
+
+
+
+    /*SearchByPartName is going to take in a String "partialName" and compare it to Part objects in the list
+    "allParts" using the "getName" function from the class "Parts". If there is a match then it will return the
+    observable list  with the included Part (partialName) that we are looking at for comparison.
      */
     private ObservableList<Part> searchByPartName (String partialName) {
         ObservableList<Part> namedPart = FXCollections.observableArrayList();
@@ -131,8 +166,9 @@ public class MainMenu implements Initializable {
         return namedPart;
     }
 
-    /*Search by product name is going to take in a String "partialname" and compare it to Product objects in the list "allProducts" using the "getName" function from the class "Products".
-    If there is a match then it will return the observable list  with the included Product (partialName) that we are looking at for comparison.
+    /*SearchByProductName is going to take in a String "partialName" and compare it to Product objects in the list
+    "allProducts" using the "getName" function from the class "Products".If there is a match then it will return the
+    observable list  with the included Product (partialName) that we are looking at for comparison.
      */
     private ObservableList<Product> searchByProductName (String partialName) {
         ObservableList<Product> namedProduct = FXCollections.observableArrayList();
@@ -149,6 +185,10 @@ public class MainMenu implements Initializable {
     }
 
 
+    /*SearchByPartsID iterates through a list of "allParts". If the argument passed in "partId" matches the getter call
+    "part.getId" we return the Object (Part) otherwise we return null as are not interested in doing anything if there
+    is not a match.
+     */
     private Part searchByPartID (int partId) {
         ObservableList<Part> allParts = Part.getAllParts();
 
@@ -163,24 +203,40 @@ public class MainMenu implements Initializable {
         return null;
     }
 
+    /*SearchByProductID iterates through a list of "allProducts". If the argument passed in "productId" matches the
+    getter call "product.getId" we return the Object (Product) otherwise we return null as are not interested in doing
+    anything if there is not a match.
+     */
     private Product searchByProductID (int productId) {
         ObservableList<Product> allProducts = Product.getAllProducts();
 
-        for (int i = 0; i < allProducts.size(); i++) {
-            Product product = allProducts.get(i);
 
-            if (product.getId() == productId) {
-                return product;
+            for (int i = 0; i < allProducts.size(); i++) {
+                Product product = allProducts.get(i);
+
+                if (product.getId() == productId) {
+                    return product;
+                }
             }
-        }
 
         return null;
     }
 
-    public void OnProductSearch(ActionEvent actionEvent) {
+
+    /*OnProductSearch is storing the textField entry into a String variable called "q". We are creating a list using
+    the function we created earlier called searchByProductName with an argument of the textField "q". If the Observable
+    list we have created "searchProduct" is == o (a name was not passed therefor we will look for an Integer "id") we
+    will try to parse the Integer from the String entered into the textField and use that Integer as an argument to call
+     the method "searchByProductID"
+     */
+    public void OnProductSearch(ActionEvent actionEvent) throws IOException {
         String q = searchProducts.getText();
 
         ObservableList<Product> searchedProduct = searchByProductName(q);
+
+        searchProducts.clear();
+
+
 
         if (searchedProduct.size() == 0) {
             try {
@@ -190,19 +246,33 @@ public class MainMenu implements Initializable {
                     searchedProduct.add(product);
             }
 
-            catch (NumberFormatException e) {
+                catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("No Product found.. Try another search.");
+                alert.showAndWait();
 
-            }
+                }
+
         }
 
 
         ProductsTable.setItems(searchedProduct);
     }
 
+
+    /*OnPartSearch is storing the textField entry into a String variable called "q". We are creating a list using the
+    function we created earlier called searchByPartName with an argument of the textField "q". If the Observable list
+    we have created "searchPart" is == o (a name was not passed therefor we will look for an Integer "id") we will
+    try to parse the Integer from the String entered into the textField and use that Integer as an argument to call the
+    method "searchByPartID"
+     */
     public void OnPartSearch(ActionEvent actionEvent) {
         String q = searchParts.getText();
 
         ObservableList<Part> searchedPart = searchByPartName(q);
+
+        searchParts.clear();
 
         if (searchedPart.size() == 0) {
             try {
@@ -213,6 +283,10 @@ public class MainMenu implements Initializable {
             }
 
             catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("No Product found.. Try another search.");
+                alert.showAndWait();
 
             }
         }
@@ -220,31 +294,64 @@ public class MainMenu implements Initializable {
         PartsTable.setItems(searchedPart);
     }
 
-
+    /* OnDeletePartsClicked will look to see if there has been an object "Part" selected. If a Part has been selected
+    then we will remove the Part from the list of allParts. If a Part has not been selected then nothing will happen.
+     */
     public void OnDeletePartsClicked(ActionEvent actionEvent) {
+        ObservableList<Part> allParts = Part.getAllParts();
+
         Part deletePart = (Part) PartsTable.getSelectionModel().getSelectedItem();
 
         if (deletePart == null)
             return;
 
-        allParts.remove(deletePart);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Confirmation ");
+        alert.setHeaderText("Confirm Delete!");
+        alert.setContentText("Are you sure you want to delete?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            allParts.remove(deletePart);
+        } else {
+            System.out.println("You clicked cancel. Please complete form.");
+        }
 
     }
 
+    /* OnDeleteProductsClicked will look to see if there has been an object "Product" selected. If a Product has been
+    selected we will remove the Product from the list of allProducts. If a Part has not been selected then nothing
+    will happen.
+     */
     public void OnDeleteProductsClicked(ActionEvent actionEvent) {
+        ObservableList<Product> allProducts = Product.getAllProducts();
+
         Product deleteProduct = (Product) ProductsTable.getSelectionModel().getSelectedItem();
 
         if (deleteProduct == null)
             return;
 
-        allProducts.remove(deleteProduct);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Confirmation ");
+        alert.setHeaderText("Confirm Delete!");
+        alert.setContentText("Are you sure you want to delete?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            allProducts.remove(deleteProduct);
+        } else {
+            System.out.println("You clicked cancel. Please complete form.");
+        }
+
+
     }
 
     public void OnAddPartsClicked (ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddPart.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1000, 500);
-        stage.setTitle("Add Part");
         stage.setScene(scene);
     }
 

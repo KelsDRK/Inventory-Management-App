@@ -2,8 +2,10 @@ package kbur.c482.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
 
-public class Part extends Inventory{
+public abstract class Part extends Inventory{
 
     private int id;
     private String name;
@@ -12,22 +14,10 @@ public class Part extends Inventory{
     private int min;
     private int max;
 
+    @FXML
+    public TableView<Part> PartsTable;
+
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
-
-    static {
-        init();
-    }
-
-   private static void init() {
-        if (allParts.size() == 0) {
-
-            allParts.add(new Part(11, "Tool", 25.6, 5, 1, 4));
-            allParts.add(new Part(12, "Hammer", 24.0, 44, 4, 7));
-            allParts.add(new Part(13, "Wrench", 54.3, 3, 3, 8));
-            allParts.add(new Part(14, "Claw", 64.4, 6, 8, 23));
-
-        }
-    }
 
     //Constructor
     public Part(int id, String name, double price, int stock, int min, int max) {
@@ -41,14 +31,13 @@ public class Part extends Inventory{
 
     }
 
+
     //Getters and Setters
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) {this.id = id;}
 
     public String getName() {
         return name;
@@ -90,9 +79,7 @@ public class Part extends Inventory{
         this.max = max;
     }
 
-    public static ObservableList<Part> getAllParts() {
-        return allParts;
-    }
+    public static ObservableList<Part> getAllParts() {return allParts;}
 
 
 

@@ -1,34 +1,46 @@
 package kbur.c482.model;
 
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+
 
 public class Inventory {
 
     // creates list with type of object that list is going to contain <Part>.
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
-    private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
 
     // adds parts/products to observable list
-    public static void addPart (Part newPart) {
+    public  void addInHousePart (InHousePart newPart) {
         allParts.add(newPart);
 
     }
-    public static void addProduct (Product newProduct) {
+
+    public void addOutsourcedPart (OutsourcedPart newPart) {
+
+        allParts.add(newPart);
+    }
+
+    public  void addProduct (Product newProduct) {
         allProducts.add(newProduct);
     }
 
     //returns all parts/products from observable lists
+    public void setAllParts (ObservableList<Part> allParts) {
+        this.allParts = allParts;
+    }
     public static ObservableList<Part> getAllParts() {
         return allParts;
     }
-    public static ObservableList<Product> getAllProducts() {
+    public ObservableList<Product> getAllProducts() {
         return allProducts;
     }
 
 
-    public static Part lookUpPartById (int partId) {
+    public Part lookUpPartById (int partId) {
         ObservableList<Part> allParts = Part.getAllParts();
 
         Part refpart = null;
@@ -47,7 +59,7 @@ public class Inventory {
 
     }
 
-    public static Product lookUpProductById (int productId) {
+    public Product lookUpProductById (int productId) {
         ObservableList<Product> allProducts = Product.getAllProducts();
 
         Product refproduct = null;
@@ -96,18 +108,11 @@ public class Inventory {
 
     }
 
-    public static void updatePart (int index, Part selectedPart) {
-
-    }
-
-    public static void updateProduct (int index, Product selectedProduct) {
-
-    }
-
+    public static void updatePart (int index, Part selectedPart) {}
+    public static void updateProduct (int index, Product selectedProduct) {}
     public static boolean deletePart (Part selectedPart) {
         return true;
     }
-
     public static boolean deleteProduct (Product selectedProduct) {
         return true;
     }

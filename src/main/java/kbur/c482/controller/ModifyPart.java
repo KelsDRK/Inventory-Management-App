@@ -25,4 +25,8 @@ public class ModifyPart implements Initializable {
         stage.setTitle("Modify Product");
         stage.setScene(scene);
     }
+
+
+
+
 }

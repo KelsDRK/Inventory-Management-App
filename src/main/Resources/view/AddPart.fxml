@@ -18,19 +18,19 @@
       <Text layoutX="182.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max" />
       <TextField fx:id="MinField" layoutX="495.0" layoutY="256.0" />
       <Text layoutX="444.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min" />
-      <TextField fx:id="MaschineID" layoutX="276.0" layoutY="288.0" />
-      <Text layoutX="182.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Machine ID" />
+      <TextField fx:id="MachineID" layoutX="276.0" layoutY="288.0" />
+      <Text fx:id="inHouseOrCompany" layoutX="182.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Machine ID" />
       <Text layoutX="168.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Part">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <RadioButton fx:id="InHouseRadioButton" layoutX="276.0" layoutY="50.0" mnemonicParsing="false" text="In-Hosue">
+      <RadioButton fx:id="InHouseRadioButton" layoutX="276.0" layoutY="50.0" mnemonicParsing="false" onAction="#radioFunction" text="In-Hosue">
          <toggleGroup>
             <ToggleGroup fx:id="tgroup" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="OutsourcedRaioButton" layoutX="401.0" layoutY="50.0" mnemonicParsing="false" text="Outsourced" toggleGroup="$tgroup" />
-      <Button fx:id="SaveButton" layoutX="276.0" layoutY="377.0" mnemonicParsing="false" text="Save" />
+      <RadioButton fx:id="OutsourcedRadioButton" layoutX="401.0" layoutY="50.0" mnemonicParsing="false" onAction="#radioFunction" text="Outsourced" toggleGroup="$tgroup" />
+      <Button fx:id="SaveButton" layoutX="276.0" layoutY="377.0" mnemonicParsing="false" onAction="#onSaveAction" text="Save" />
       <Button fx:id="CancelButton" layoutX="375.0" layoutY="377.0" mnemonicParsing="false" onAction="#OnCancelAction" text="Cancel" />
    </children>
 </AnchorPane>
