@@ -7,17 +7,13 @@ import javafx.scene.control.TableView;
 
 public abstract class Part extends Inventory{
 
+    public boolean insanceof;
     private int id;
     private String name;
     private double price;
     private int stock;
     private int min;
     private int max;
-
-    @FXML
-    public TableView<Part> PartsTable;
-
-    private static ObservableList<Part> allParts = FXCollections.observableArrayList();
 
     //Constructor
     public Part(int id, String name, double price, int stock, int min, int max) {
@@ -78,8 +74,6 @@ public abstract class Part extends Inventory{
     public void setMax(int max) {
         this.max = max;
     }
-
-    public static ObservableList<Part> getAllParts() {return allParts;}
 
 
 

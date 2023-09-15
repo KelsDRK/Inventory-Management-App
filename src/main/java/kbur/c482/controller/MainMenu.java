@@ -22,32 +22,25 @@ import kbur.c482.model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 
 public class MainMenu implements Initializable {
 
-    @FXML
-    public TableView<Part> PartsTable;
-    @FXML
-    public TableColumn<Part, Integer>partIdColumn;
-    @FXML
-    public TableColumn<Part, String>partNameColumn;
-    @FXML
-    public TableColumn<Part, Integer> partsInvLevelColumn;
-    @FXML
-    public TableColumn<Part, Double> partPriceColumn;
+    @FXML public TableView<Part> PartsTable;
+    @FXML public TableColumn<Part, Integer>partIdColumn;
+    @FXML public TableColumn<Part, String>partNameColumn;
+    @FXML public TableColumn<Part, Integer> partsInvLevelColumn;
+    @FXML public TableColumn<Part, Double> partPriceColumn;
 
-    @FXML
-    public TableView<Product> ProductsTable;
-    @FXML
-    public TableColumn<Product, Integer> productIdColumn;
-    @FXML
-    public TableColumn<Product, String> productNameColumn;
-    @FXML
-    public TableColumn<Product, Integer> productInvLevelColumn;
-    @FXML
-    public TableColumn<Product, Double> productPriceColumn;
+    @FXML public TableView<Product> ProductsTable;
+    @FXML public TableColumn<Product, Integer> productIdColumn;
+    @FXML public TableColumn<Product, String> productNameColumn;
+    @FXML public TableColumn<Product, Integer> productInvLevelColumn;
+    @FXML public TableColumn<Product, Double> productPriceColumn;
+
+    @FXML private TextField IdField;
 
     public TextField searchParts;
     public TextField searchProducts;
@@ -64,17 +57,26 @@ public class MainMenu implements Initializable {
     public Button ModifyProductsButton;
     public Button DeleteProductsButton;
 
-    Inventory inv = new Inventory();
+    Random rand = new Random();
 
-    public MainMenu() {
+    private static Part partModify;
 
+
+    public static Part getTheModifyPart () {
+        return partModify;
     }
+
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        PartsTable.setItems(allParts);
-        ProductsTable.setItems(allProducts);
+        addTestData();
+
+        PartsTable.setItems(Inventory.getAllParts());
+        ProductsTable.setItems(Inventory.getAllProducts());
 
         partIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -86,19 +88,144 @@ public class MainMenu implements Initializable {
         productInvLevelColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        initialData(inv);
+
+    }
+
+    /* firstTest protects the initializer from duplicating data upon return to the main screen from another screen.
+    */
+    private static boolean firstTest = true;
+    private void addTestData () {
+
+        if(!firstTest) {
+            return;
+        }
+
+        firstTest = false;
+
+        InHousePart inPart1 = new InHousePart(1, "A01", 3.99, 5, 1, 10, 1);
+        InHousePart inPart2 = new InHousePart(2, "A23", 5.99, 8, 1, 10, 2);
+        OutsourcedPart outPart1 = new OutsourcedPart(3, "A99", 8.89, 12, 1, 20, "C1");
+
+        Inventory.addPart(inPart1);
+        Inventory.addPart(inPart2);
+        Inventory.addPart(outPart1);
+
+        Product product1 = new Product(1, "B23", 4.99, 5, 1, 15);
+        Product product2 = new Product(2, "B14", 7.99, 6, 1, 10);
+        Product product3 = new Product(3, "B55", 8.99, 7, 1, 15);
+
+        Inventory.addProduct(product1);
+        Inventory.addProduct(product2);
+        Inventory.addProduct(product3);
+    }
+
+    public void PartsTableController(SortEvent<TableView<Part>> tableViewSortEvent) {
+    }
+
+    // OnAddPartsClicked takes the user to the "Add part" form.
+    public void OnAddPartsClicked(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AddPart.fxml"));
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1000, 500);
+        stage.setScene(scene);
+
+    }
+
+    /* OnDeletePartsClicked will look to see if there has been an object "Part" selected. If a Part has been selected
+    then we will remove the Part from the list of allParts. If a Part has not been selected then nothing will happen.
+     */
+    public void OnDeletePartsClicked(ActionEvent actionEvent) {
+
+        ObservableList<Part> allParts = Inventory.getAllParts();
+
+        Part deletePart = (Part) PartsTable.getSelectionModel().getSelectedItem();
+
+        if (deletePart == null)
+            return;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Confirmation ");
+        alert.setHeaderText("Confirm Delete!");
+        alert.setContentText("Are you sure you want to delete?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            allParts.remove(deletePart);
+        } else {
+            System.out.println("You clicked cancel. Please complete form.");
+        }
+    }
+
+    // OnAddProductClicked takes the user to the "Add Product" form.
+    public void OnAddProductClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AddProduct.fxml"));
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1000, 500);
+        stage.setTitle("Add Product");
+        stage.setScene(scene);
+    }
 
 
-        ObservableList<Part> parts = Part.getAllParts();
-        PartsTable.setItems(Inventory.getAllParts());
+    public void OnModifyProductsClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyProduct.fxml"));
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1000, 500);
+        stage.setTitle("Modify Product");
+        stage.setScene(scene);
+    }
 
-        ObservableList<Product> products = Product.getAllProducts();
-        ProductsTable.setItems(products);
+    public void OnModifyPartsClicked(ActionEvent actionEvent) throws IOException {
+
+        partModify = (Part) PartsTable.getSelectionModel().getSelectedItem();
+        if (partModify == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("No part selected, Choose a part from the table to modify.");
+            alert.showAndWait();
+        } else {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyPart.fxml"));
+            Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 1000, 500);
+            stage.setTitle("Modify Product");
+            stage.setScene(scene);
+        }
+
+
+
 
     }
 
 
+    /* OnDeleteProductsClicked will look to see if there has been an object "Product" selected. If a Product has been
+    selected we will remove the Product from the list of allProducts. If a Part has not been selected then nothing
+    will happen.
+     */
+    public void OnDeleteProductsClicked(ActionEvent actionEvent) {
 
+        ObservableList<Product> allProducts = Product.getAllProducts();
+
+        Product deleteProduct = (Product) ProductsTable.getSelectionModel().getSelectedItem();
+
+        if (deleteProduct == null)
+            return;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Confirmation ");
+        alert.setHeaderText("Confirm Delete!");
+        alert.setContentText("Are you sure you want to delete?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            allProducts.remove(deleteProduct);
+        } else {
+            System.out.println("You clicked cancel. Please complete form.");
+        }
+    }
+
+    //   OnExitButtonClicked closes the program window after clicking the button "Exit"
     public void OnExitButtonClicked(ActionEvent actionEvent) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -114,38 +241,6 @@ public class MainMenu implements Initializable {
             System.out.println("You clicked cancel. Please complete form.");
         }
     }
-
-    public void initialData (Inventory inventory) {
-        this.inv.setAllParts(inventory.getAllParts());
-        PartsTable.setItems(this.inv.getAllParts());
-
-    }
-
-    public void testData () {
-        InHousePart part1 =  new InHousePart(1, "Part 1", 24.35, 10, 4, 20, 10);
-        InHousePart part2 =  new InHousePart(2, "Part 2", 56.22, 5, 4, 20, 10);
-        InHousePart part3 =  new InHousePart(3, "Part 3", 12.46, 43, 4, 100, 10);
-        InHousePart part4 =  new InHousePart(4, "Part 4", 74.34, 24, 4, 50, 10);
-
-        OutsourcedPart pout1 = new OutsourcedPart(5, "Pout 1", 22.34, 25, 3, 4, "Company 1");
-        OutsourcedPart pout2 = new OutsourcedPart(6, "Pout 2", 12.44, 5, 4, 10, "Company 2");
-        OutsourcedPart pout3 = new OutsourcedPart(7, "Pout 3", 43.22, 25, 5, 50, "Company 3");
-        OutsourcedPart pout4 = new OutsourcedPart(8, "Pout 4", 16.95, 25, 1, 30, "Company 4");
-
-        inv.addInHousePart(part1);
-        inv.addInHousePart(part2);
-        inv.addInHousePart(part3);
-        inv.addInHousePart(part4);
-
-        inv.addOutsourcedPart(pout1);
-        inv.addOutsourcedPart(pout2);
-        inv.addOutsourcedPart(pout3);
-        inv.addOutsourcedPart(pout4);
-
-    }
-
-
-
 
 
     /*SearchByPartName is going to take in a String "partialName" and compare it to Part objects in the list
@@ -165,6 +260,7 @@ public class MainMenu implements Initializable {
 
         return namedPart;
     }
+
 
     /*SearchByProductName is going to take in a String "partialName" and compare it to Product objects in the list
     "allProducts" using the "getName" function from the class "Products".If there is a match then it will return the
@@ -203,6 +299,7 @@ public class MainMenu implements Initializable {
         return null;
     }
 
+
     /*SearchByProductID iterates through a list of "allProducts". If the argument passed in "productId" matches the
     getter call "product.getId" we return the Object (Product) otherwise we return null as are not interested in doing
     anything if there is not a match.
@@ -211,55 +308,16 @@ public class MainMenu implements Initializable {
         ObservableList<Product> allProducts = Product.getAllProducts();
 
 
-            for (int i = 0; i < allProducts.size(); i++) {
-                Product product = allProducts.get(i);
+        for (int i = 0; i < allProducts.size(); i++) {
+            Product product = allProducts.get(i);
 
-                if (product.getId() == productId) {
-                    return product;
-                }
+            if (product.getId() == productId) {
+                return product;
             }
+        }
 
         return null;
     }
-
-
-    /*OnProductSearch is storing the textField entry into a String variable called "q". We are creating a list using
-    the function we created earlier called searchByProductName with an argument of the textField "q". If the Observable
-    list we have created "searchProduct" is == o (a name was not passed therefor we will look for an Integer "id") we
-    will try to parse the Integer from the String entered into the textField and use that Integer as an argument to call
-     the method "searchByProductID"
-     */
-    public void OnProductSearch(ActionEvent actionEvent) throws IOException {
-        String q = searchProducts.getText();
-
-        ObservableList<Product> searchedProduct = searchByProductName(q);
-
-        searchProducts.clear();
-
-
-
-        if (searchedProduct.size() == 0) {
-            try {
-                int productId = Integer.parseInt(q);
-                Product product = searchByProductID(productId);
-                if (product != null)
-                    searchedProduct.add(product);
-            }
-
-                catch (NumberFormatException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setContentText("No Product found.. Try another search.");
-                alert.showAndWait();
-
-                }
-
-        }
-
-
-        ProductsTable.setItems(searchedProduct);
-    }
-
 
     /*OnPartSearch is storing the textField entry into a String variable called "q". We are creating a list using the
     function we created earlier called searchByPartName with an argument of the textField "q". If the Observable list
@@ -268,6 +326,7 @@ public class MainMenu implements Initializable {
     method "searchByPartID"
      */
     public void OnPartSearch(ActionEvent actionEvent) {
+
         String q = searchParts.getText();
 
         ObservableList<Part> searchedPart = searchByPartName(q);
@@ -294,93 +353,41 @@ public class MainMenu implements Initializable {
         PartsTable.setItems(searchedPart);
     }
 
-    /* OnDeletePartsClicked will look to see if there has been an object "Part" selected. If a Part has been selected
-    then we will remove the Part from the list of allParts. If a Part has not been selected then nothing will happen.
+    /*OnProductSearch is storing the textField entry into a String variable called "q". We are creating a list using
+    the function we created earlier called searchByProductName with an argument of the textField "q". If the Observable
+    list we have created "searchProduct" is == o (a name was not passed therefor we will look for an Integer "id") we
+    will try to parse the Integer from the String entered into the textField and use that Integer as an argument to call
+     the method "searchByProductID"
      */
-    public void OnDeletePartsClicked(ActionEvent actionEvent) {
-        ObservableList<Part> allParts = Part.getAllParts();
+    public void OnProductSearch(ActionEvent actionEvent) {
 
-        Part deletePart = (Part) PartsTable.getSelectionModel().getSelectedItem();
+        String q = searchProducts.getText();
 
-        if (deletePart == null)
-            return;
+        ObservableList<Product> searchedProduct = searchByProductName(q);
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.initModality(Modality.NONE);
-        alert.setTitle("Confirmation ");
-        alert.setHeaderText("Confirm Delete!");
-        alert.setContentText("Are you sure you want to delete?");
-        Optional<ButtonType> result = alert.showAndWait();
+        searchProducts.clear();
 
-        if (result.get() == ButtonType.OK) {
-            allParts.remove(deletePart);
-        } else {
-            System.out.println("You clicked cancel. Please complete form.");
-        }
 
-    }
 
-    /* OnDeleteProductsClicked will look to see if there has been an object "Product" selected. If a Product has been
-    selected we will remove the Product from the list of allProducts. If a Part has not been selected then nothing
-    will happen.
-     */
-    public void OnDeleteProductsClicked(ActionEvent actionEvent) {
-        ObservableList<Product> allProducts = Product.getAllProducts();
+        if (searchedProduct.size() == 0) {
+            try {
+                int productId = Integer.parseInt(q);
+                Product product = searchByProductID(productId);
+                if (product != null)
+                    searchedProduct.add(product);
+            }
 
-        Product deleteProduct = (Product) ProductsTable.getSelectionModel().getSelectedItem();
+            catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("No Product found.. Try another search.");
+                alert.showAndWait();
 
-        if (deleteProduct == null)
-            return;
+            }
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.initModality(Modality.NONE);
-        alert.setTitle("Confirmation ");
-        alert.setHeaderText("Confirm Delete!");
-        alert.setContentText("Are you sure you want to delete?");
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.get() == ButtonType.OK) {
-            allProducts.remove(deleteProduct);
-        } else {
-            System.out.println("You clicked cancel. Please complete form.");
         }
 
 
+        ProductsTable.setItems(searchedProduct);
     }
-
-    public void OnAddPartsClicked (ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/AddPart.fxml"));
-        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1000, 500);
-        stage.setScene(scene);
-    }
-
-    public void OnAddProductClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/AddProduct.fxml"));
-        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1000, 500);
-        stage.setTitle("Add Product");
-        stage.setScene(scene);
-    }
-
-    public void OnModifyProductsClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyProduct.fxml"));
-        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1000, 500);
-        stage.setTitle("Modify Product");
-        stage.setScene(scene);
-    }
-
-    public void OnModifyPartsClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyPart.fxml"));
-        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1000, 500);
-        stage.setTitle("Modify Part");
-        stage.setScene(scene);
-    }
-
-    public void PartsTableController(SortEvent<TableView<Part>> tableViewSortEvent) {
-    }
-
-
 }
