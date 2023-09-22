@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kbur.c482.controller.MainMenu">
    <children>
-      <TableView fx:id="PartsTable" layoutX="41.0" layoutY="97.0" onSort="#PartsTableController" prefHeight="245.0" prefWidth="446.0">
+      <TableView fx:id="PartsTable" layoutX="41.0" layoutY="97.0" prefHeight="245.0" prefWidth="446.0">
         <columns>
           <TableColumn fx:id="partIdColumn" prefWidth="73.0" text="Parts ID" />
           <TableColumn fx:id="partNameColumn" prefWidth="95.0" text="Part Name" />
@@ -34,7 +34,7 @@
          </font>
       </Text>
       <TextField fx:id="searchProducts" layoutX="821.0" layoutY="62.0" promptText="Search by Product ID or Name" />
-      <Button fx:id="AddPartsButton" layoutX="41.0" layoutY="348.0" mnemonicParsing="false" onAction="#OnAddPartsClicked" text="Add" />
+      <Button fx:id="AddPartsButton" layoutX="41.0" layoutY="348.0" mnemonicParsing="false" onAction="#OnAddPartClicked" text="Add" />
       <Button fx:id="ModifyPartsButton" layoutX="93.0" layoutY="348.0" mnemonicParsing="false" onAction="#OnModifyPartsClicked" text="Modify" />
       <Button fx:id="DeletePartsButton" layoutX="165.0" layoutY="348.0" mnemonicParsing="false" onAction="#OnDeletePartsClicked" text="Delete" />
       <Button fx:id="AddProductsButton" layoutX="525.0" layoutY="348.0" mnemonicParsing="false" onAction="#OnAddProductClicked" text="Add" />

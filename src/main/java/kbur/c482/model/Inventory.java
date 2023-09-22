@@ -17,18 +17,20 @@ public class Inventory {
     public static void addPart (Part part) {
         allParts.add(part);
     }
-
     public static ObservableList<Part> getAllParts () {
         return allParts;
     }
+    public static void updatePart (int id, Part updatedPart) {allParts.set(id, updatedPart);}
 
-    public static void addProduct (Product product) {
-        allProducts.add(product);
-    }
-
+    public static void addProduct (Product product) {allProducts.add(product);}
     public static ObservableList<Product> getAllProducts () {
         return allProducts;
     }
+    public static void updateProduct (int id, Product updateProduct) {allProducts.set(id, updateProduct);}
+
+
+
+
 
 
 }

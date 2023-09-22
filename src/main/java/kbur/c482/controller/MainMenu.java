@@ -21,6 +21,7 @@ import kbur.c482.model.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -40,11 +41,8 @@ public class MainMenu implements Initializable {
     @FXML public TableColumn<Product, Integer> productInvLevelColumn;
     @FXML public TableColumn<Product, Double> productPriceColumn;
 
-    @FXML private TextField IdField;
-
-    public TextField searchParts;
-    public TextField searchProducts;
-
+    @FXML public TextField searchParts;
+    @FXML public TextField searchProducts;
 
     private  ObservableList<Part> allParts = FXCollections.observableArrayList();
     private  ObservableList<Product> allProducts = FXCollections.observableArrayList();
@@ -57,43 +55,39 @@ public class MainMenu implements Initializable {
     public Button ModifyProductsButton;
     public Button DeleteProductsButton;
 
-    Random rand = new Random();
-
     private static Part partModify;
+    public static Part getTheModifyPart () {return partModify;}
+
+    private static Product productModify;
+    public static Product getProductModify () {return productModify;}
 
 
-    public static Part getTheModifyPart () {
-        return partModify;
-    }
-
-
-
-
-
+    /*Initializer is populated with the test data*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         addTestData();
 
-        PartsTable.setItems(Inventory.getAllParts());
-        ProductsTable.setItems(Inventory.getAllProducts());
-
         partIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         partsInvLevelColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        ObservableList<Part> parts = Inventory.getAllParts();
+        PartsTable.setItems(parts);
 
         productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInvLevelColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-
+        ObservableList<Product> products = Inventory.getAllProducts();
+        ProductsTable.setItems(products);
     }
 
-    /* firstTest protects the initializer from duplicating data upon return to the main screen from another screen.
+    /* firstTest protects the initializer from duplicating data upon return to the main screen from a different screen.
     */
     private static boolean firstTest = true;
+
+    /*Adds data to use for testing functionality in the program.*/
     private void addTestData () {
 
         if(!firstTest) {
@@ -110,53 +104,15 @@ public class MainMenu implements Initializable {
         Inventory.addPart(inPart2);
         Inventory.addPart(outPart1);
 
-        Product product1 = new Product(1, "B23", 4.99, 5, 1, 15);
-        Product product2 = new Product(2, "B14", 7.99, 6, 1, 10);
-        Product product3 = new Product(3, "B55", 8.99, 7, 1, 15);
+        Product product1 = new Product(4, "B23", 4.99, 5, 1, 15);
+        Product product2 = new Product(5, "B14", 7.99, 6, 1, 10);
+        Product product3 = new Product(6, "B55", 8.99, 7, 1, 15);
 
         Inventory.addProduct(product1);
         Inventory.addProduct(product2);
         Inventory.addProduct(product3);
     }
 
-    public void PartsTableController(SortEvent<TableView<Part>> tableViewSortEvent) {
-    }
-
-    // OnAddPartsClicked takes the user to the "Add part" form.
-    public void OnAddPartsClicked(ActionEvent actionEvent) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("/view/AddPart.fxml"));
-        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1000, 500);
-        stage.setScene(scene);
-
-    }
-
-    /* OnDeletePartsClicked will look to see if there has been an object "Part" selected. If a Part has been selected
-    then we will remove the Part from the list of allParts. If a Part has not been selected then nothing will happen.
-     */
-    public void OnDeletePartsClicked(ActionEvent actionEvent) {
-
-        ObservableList<Part> allParts = Inventory.getAllParts();
-
-        Part deletePart = (Part) PartsTable.getSelectionModel().getSelectedItem();
-
-        if (deletePart == null)
-            return;
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.initModality(Modality.NONE);
-        alert.setTitle("Confirmation ");
-        alert.setHeaderText("Confirm Delete!");
-        alert.setContentText("Are you sure you want to delete?");
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.get() == ButtonType.OK) {
-            allParts.remove(deletePart);
-        } else {
-            System.out.println("You clicked cancel. Please complete form.");
-        }
-    }
 
     // OnAddProductClicked takes the user to the "Add Product" form.
     public void OnAddProductClicked(ActionEvent actionEvent) throws IOException {
@@ -167,18 +123,39 @@ public class MainMenu implements Initializable {
         stage.setScene(scene);
     }
 
+    // OnAddPartsClicked takes the user to the "Add part" form.
+    public void OnAddPartClicked(ActionEvent actionEvent) throws IOException {
 
-    public void OnModifyProductsClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyProduct.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AddPart.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1000, 500);
-        stage.setTitle("Modify Product");
         stage.setScene(scene);
+
     }
 
+    /*Gets the Product that the user has selected and uses this data to populate the "Modify Product" screen.*/
+    public void OnModifyProductsClicked(ActionEvent actionEvent) throws IOException {
+
+        productModify = (Product) ProductsTable.getSelectionModel().getSelectedItem();
+
+        if (productModify == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("No part selected, Choose a part from the table to modify.");
+            alert.showAndWait();
+        } else {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/ModifyProduct.fxml")));
+            Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 1000, 500);
+            stage.setTitle("Modify Product");
+            stage.setScene(scene);
+        }
+    }
+
+    /*Gets the Part that the user has selected and uses this data to populate the "Modify Part" screen.*/
     public void OnModifyPartsClicked(ActionEvent actionEvent) throws IOException {
 
-        partModify = (Part) PartsTable.getSelectionModel().getSelectedItem();
+        partModify = PartsTable.getSelectionModel().getSelectedItem();
         if (partModify == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -188,13 +165,9 @@ public class MainMenu implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyPart.fxml"));
             Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 1000, 500);
-            stage.setTitle("Modify Product");
+            stage.setTitle("Modify Part");
             stage.setScene(scene);
         }
-
-
-
-
     }
 
 
@@ -225,7 +198,33 @@ public class MainMenu implements Initializable {
         }
     }
 
-    //   OnExitButtonClicked closes the program window after clicking the button "Exit"
+    /* OnDeletePartsClicked will look to see if there has been an object "Part" selected. If a Part has been selected
+    then we will remove the Part from the list of allParts. If a Part has not been selected then nothing will happen.
+     */
+    public void OnDeletePartsClicked(ActionEvent actionEvent) {
+
+        ObservableList<Part> allParts = Inventory.getAllParts();
+
+        Part deletePart = (Part) PartsTable.getSelectionModel().getSelectedItem();
+
+        if (deletePart == null)
+            return;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Confirmation ");
+        alert.setHeaderText("Confirm Delete!");
+        alert.setContentText("Are you sure you want to delete?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            allParts.remove(deletePart);
+        } else {
+            System.out.println("You clicked cancel. Please complete form.");
+        }
+    }
+
+    //  OnExitButtonClicked closes the program window after clicking the button "Exit"
     public void OnExitButtonClicked(ActionEvent actionEvent) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -390,4 +389,5 @@ public class MainMenu implements Initializable {
 
         ProductsTable.setItems(searchedProduct);
     }
+
 }

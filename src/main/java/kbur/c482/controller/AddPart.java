@@ -13,10 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import kbur.c482.model.InHousePart;
-import kbur.c482.model.Inventory;
-import kbur.c482.model.OutsourcedPart;
-import kbur.c482.model.Part;
+import kbur.c482.model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,15 +31,6 @@ public class AddPart implements Initializable {
     @FXML private TextField MinField;
     @FXML private TextField MachineID;
 
-    @FXML private Button SaveButton;
-    @FXML private Button CancelButton;
-
-    @FXML private TableView<Part> PartsTable;
-    @FXML private TableColumn<Part, Integer> partIdColumn;
-    @FXML private TableColumn<Part, String> partNameColumn;
-    @FXML private TableColumn<Part, Integer> partsInvLevelColumn;
-    @FXML private TableColumn<Part, Double> partPriceColumn;
-
     @FXML private RadioButton OutsourcedRadioButton;
     @FXML private RadioButton InHouseRadioButton;
     @FXML private Text inHouseOrCompany;
@@ -52,6 +40,10 @@ public class AddPart implements Initializable {
     Inventory inv = new Inventory();
     Random random = new Random();
 
+
+
+
+    //setting an empty initializer where the ID field will be disabled and a random ID will be generated.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         IdField.setDisable(true);
@@ -59,6 +51,7 @@ public class AddPart implements Initializable {
 
     }
 
+    //this function is the logic behind getting the random ID used in the initializer.
     public String getNewPartID() {
         int partID = random.nextInt();
         boolean partFound = false;
@@ -69,6 +62,7 @@ public class AddPart implements Initializable {
         return Integer.toString(partID);
     }
 
+    //This function will change the Text of the Machine ID/ Company name field when the related Radio button is selected.
     public void radioFunction(ActionEvent actionEvent) {
         if (OutsourcedRadioButton.isSelected())
             inHouseOrCompany.setText("Company Name");
@@ -77,6 +71,10 @@ public class AddPart implements Initializable {
         }
     }
 
+    /*Here we are parsing the different fields of the AddPart form and then using those values to create a new Part object.
+      If the In-House Radio button is selected the user will need to provide a Machine ID. If the Outsourced radio
+      button is selected then the user will need to provide a Company Name. The Part is then added to the Inventory.
+    */
     public void onSaveAction(ActionEvent actionEvent) throws IOException {
 
         if (InHouseRadioButton.isSelected()) {
@@ -84,10 +82,12 @@ public class AddPart implements Initializable {
                     NameField.getText(),
                     Double.parseDouble(PriceCostField.getText()),
                     Integer.parseInt(InvField.getText()),
-                    Integer.parseInt(MaxField.getText()),
                     Integer.parseInt(MinField.getText()),
+                    Integer.parseInt(MaxField.getText()),
                     Integer.parseInt(MachineID.getText()));
-            // Add to the inventory
+            int min = Integer.parseInt(MinField.getText());
+            int max = Integer.parseInt(MaxField.getText());
+            int invError = Integer.parseInt(InvField.getText());
             inv.addPart(part);
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
@@ -95,17 +95,17 @@ public class AddPart implements Initializable {
             Scene scene = new Scene(root, 1000, 500);
             stage.setTitle("Modify Product");
             stage.setScene(scene);
+
         }
-        // if (outsourced radio button is selected) {add an outsourced part to the inventory}
+
         if (OutsourcedRadioButton.isSelected()) {
             Part outsourced = new OutsourcedPart(Integer.parseInt(IdField.getText()),
                     NameField.getText(),
                     Double.parseDouble(PriceCostField.getText()),
                     Integer.parseInt(InvField.getText()),
-                    Integer.parseInt(MaxField.getText()),
                     Integer.parseInt(MinField.getText()),
+                    Integer.parseInt(MaxField.getText()),
                     MachineID.getText());
-            // Add this new part to the inventory
             inv.addPart(outsourced);
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
@@ -130,7 +130,7 @@ public class AddPart implements Initializable {
     }
 
 
-
+    /*If the user selects the "Cancel" option then they will be returned to the main menu*/
     public void OnCancelAction (ActionEvent actionEvent) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

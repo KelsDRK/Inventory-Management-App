@@ -7,7 +7,6 @@ import javafx.scene.control.TableView;
 
 public abstract class Part extends Inventory{
 
-    public boolean insanceof;
     private int id;
     private String name;
     private double price;

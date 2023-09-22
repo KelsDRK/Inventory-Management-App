@@ -12,6 +12,8 @@ public class Product extends Inventory {
     private int min;
     private int max;
 
+    private static ObservableList<Part> linkedParts = FXCollections.observableArrayList();
+
     public Product (int id, String name, double price, int stock, int min, int max) {
         this.id = id;
         this.name = name;
@@ -68,6 +70,23 @@ public class Product extends Inventory {
 
     public void setMax(int max) {
         this.max = max;
+    }
+
+    public static ObservableList<Part> getLinkedParts() {
+        return linkedParts;
+    }
+
+    public void addLinkedParts(ObservableList<Part> part) {
+        this.linkedParts.addAll(part);
+    }
+
+    public static boolean deleteLinkedPart(Part partToDelete) {
+        if (linkedParts.contains(partToDelete)) {
+            linkedParts.remove(partToDelete);
+            return true;
+        }
+        else
+            return false;
     }
 
 }
