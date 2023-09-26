@@ -57,7 +57,7 @@ public class AddProduct implements Initializable {
     private static Product productModify;
 
 
-    private ObservableList<Part> productParts = FXCollections.observableArrayList();
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
 
 
@@ -81,7 +81,7 @@ public class AddProduct implements Initializable {
         PartNameColumnSecondary.setCellValueFactory(new PropertyValueFactory<>("name"));
         InvLevelColumnSecondary.setCellValueFactory(new PropertyValueFactory<>("stock"));
         PriceColumnSecondary.setCellValueFactory(new PropertyValueFactory<>("price"));
-        SelectedPartsTable.setItems(productParts);
+        SelectedPartsTable.setItems(associatedParts);
 
     }
 
@@ -177,8 +177,8 @@ public class AddProduct implements Initializable {
             alert.setContentText("No part selected, Choose a part from the table to modify.");
             alert.showAndWait();
         } else {
-            productParts.add(addedToProduct);
-            SelectedPartsTable.setItems(productParts);
+            associatedParts.add(addedToProduct);
+            SelectedPartsTable.setItems(associatedParts);
         }
 
     }
@@ -194,8 +194,8 @@ public class AddProduct implements Initializable {
             alert.setContentText("No part selected, Choose a part from the table to modify.");
             alert.showAndWait();
         } else {
-            productParts.remove(partModify);
-            SelectedPartsTable.setItems(productParts);
+            associatedParts.remove(partModify);
+            SelectedPartsTable.setItems(associatedParts);
         }
 
     }
@@ -205,7 +205,7 @@ public class AddProduct implements Initializable {
     * is added to Inventory.*/
     public void onSaveAction(ActionEvent actionEvent) {
         try {
-            int index = Inventory.getAllProducts().indexOf(productModify);
+
             int max = Integer.parseInt(MaxField.getText());
             int min = Integer.parseInt(MinField.getText());
             int inventory = Integer.parseInt(InvField.getText());
@@ -214,9 +214,10 @@ public class AddProduct implements Initializable {
             int id = Integer.parseInt(IdField.getText());
 
             boolean addPart = false;
+
             if (Errors.checkInventory(min, max, inventory) && Errors.checkMinValue(min, max)) {
                 Product newProduct = new Product(id, name, price, inventory, min, max);
-                newProduct.addLinkedParts(productParts);
+                newProduct.setAssociatedParts(SelectedPartsTable.getItems());
                 Inventory.addProduct(newProduct);
                 addPart = true;
             }

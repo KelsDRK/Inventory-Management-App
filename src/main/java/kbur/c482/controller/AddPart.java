@@ -77,54 +77,59 @@ public class AddPart implements Initializable {
     */
     public void onSaveAction(ActionEvent actionEvent) throws IOException {
 
-        if (InHouseRadioButton.isSelected()) {
-            Part part = new InHousePart(Integer.parseInt(IdField.getText()),
-                    NameField.getText(),
-                    Double.parseDouble(PriceCostField.getText()),
-                    Integer.parseInt(InvField.getText()),
-                    Integer.parseInt(MinField.getText()),
-                    Integer.parseInt(MaxField.getText()),
-                    Integer.parseInt(MachineID.getText()));
-            int min = Integer.parseInt(MinField.getText());
-            int max = Integer.parseInt(MaxField.getText());
-            int invError = Integer.parseInt(InvField.getText());
-            inv.addPart(part);
+        try {
+            if (InHouseRadioButton.isSelected()) {
+                Part part = new InHousePart(Integer.parseInt(IdField.getText()),
+                        NameField.getText(),
+                        Double.parseDouble(PriceCostField.getText()),
+                        Integer.parseInt(InvField.getText()),
+                        Integer.parseInt(MinField.getText()),
+                        Integer.parseInt(MaxField.getText()),
+                        Integer.parseInt(MachineID.getText()));
+                int min = Integer.parseInt(MinField.getText());
+                int max = Integer.parseInt(MaxField.getText());
+                int invError = Integer.parseInt(InvField.getText());
+                inv.addPart(part);
 
-            Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
-            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 1000, 500);
-            stage.setTitle("Modify Product");
-            stage.setScene(scene);
+                Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+                Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root, 1000, 500);
+                stage.setTitle("Modify Product");
+                stage.setScene(scene);
 
+            }
+
+            if (OutsourcedRadioButton.isSelected()) {
+                Part outsourced = new OutsourcedPart(Integer.parseInt(IdField.getText()),
+                        NameField.getText(),
+                        Double.parseDouble(PriceCostField.getText()),
+                        Integer.parseInt(InvField.getText()),
+                        Integer.parseInt(MinField.getText()),
+                        Integer.parseInt(MaxField.getText()),
+                        MachineID.getText());
+                inv.addPart(outsourced);
+
+                Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+                Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root, 1000, 500);
+                stage.setTitle("Modify Product");
+                stage.setScene(scene);
+
+            }
+
+            if (!InHouseRadioButton.isSelected() && !OutsourcedRadioButton.isSelected()) {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initModality(Modality.NONE);
+                alert.setTitle("Error ");
+                alert.setHeaderText("Part Type Not Selected!");
+                alert.setContentText("Select part type In-House / Outsourced");
+                Optional<ButtonType> result = alert.showAndWait();
+
+            }
         }
-
-        if (OutsourcedRadioButton.isSelected()) {
-            Part outsourced = new OutsourcedPart(Integer.parseInt(IdField.getText()),
-                    NameField.getText(),
-                    Double.parseDouble(PriceCostField.getText()),
-                    Integer.parseInt(InvField.getText()),
-                    Integer.parseInt(MinField.getText()),
-                    Integer.parseInt(MaxField.getText()),
-                    MachineID.getText());
-            inv.addPart(outsourced);
-
-            Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
-            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 1000, 500);
-            stage.setTitle("Modify Product");
-            stage.setScene(scene);
-
-        }
-
-        if (!InHouseRadioButton.isSelected() && !OutsourcedRadioButton.isSelected()) {
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initModality(Modality.NONE);
-            alert.setTitle("Error ");
-            alert.setHeaderText("Part Type Not Selected!");
-            alert.setContentText("Select part type In-House / Outsourced");
-            Optional<ButtonType> result = alert.showAndWait();
-
+        catch (Exception e) {
+            Errors.alertError("Error", "Error Adding Part", "Check that all fields are correctly filled and try again.");
         }
 
     }

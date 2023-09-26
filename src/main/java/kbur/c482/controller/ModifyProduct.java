@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
+import java.util.jar.Attributes;
 
 
 public class ModifyProduct implements Initializable {
@@ -50,10 +50,12 @@ public class ModifyProduct implements Initializable {
     @FXML Button SearchButton;
 
 
-    private ObservableList<Part> productParts = FXCollections.observableArrayList();
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+    private ObservableList<Part> bottomList = FXCollections.observableArrayList();
 
-    private Product productModify;
-    private  Part partModify;
+    //gets the product to be modified
+    public Product productModify;
+
 
 
 
@@ -64,22 +66,20 @@ public class ModifyProduct implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         productModify = MainMenu.getProductModify();
-        productParts = Product.getLinkedParts();
-
+        associatedParts = productModify.getAllAssociatedParts();
 
 
         PartIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         PartNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         InvLevelColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         PriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        ObservableList<Part> parts = Inventory.getAllParts();
-        AllPartsTable.setItems(parts);
+        AllPartsTable.setItems(Inventory.getAllParts());
 
         selectedPartIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         selectedPartNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         selectedInvLevelColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         selectedPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        SelectedPartsTable.setItems(productParts);
+        SelectedPartsTable.setItems(associatedParts);
 
         IdField.setText(String.valueOf(productModify.getId()));
         NameField.setText(String.valueOf(productModify.getName()));
@@ -97,9 +97,7 @@ public class ModifyProduct implements Initializable {
     * added to the Selected Parts table.*/
     public void onAddAction(ActionEvent actionEvent) {
 
-        //partModify = AllPartsTable.getSelectionModel().getSelectedItem();
-
-        Part addedToProduct = (Part) AllPartsTable.getSelectionModel().getSelectedItem();
+        Part addedToProduct = AllPartsTable.getSelectionModel().getSelectedItem();
 
         if (addedToProduct == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -107,8 +105,8 @@ public class ModifyProduct implements Initializable {
             alert.setContentText("No part selected, Choose a part from the table to modify.");
             alert.showAndWait();
         } else {
-            productParts.add(addedToProduct);
-            SelectedPartsTable.setItems(productParts);
+            associatedParts.add(addedToProduct);
+            SelectedPartsTable.setItems(associatedParts);
         }
 
     }
@@ -116,16 +114,16 @@ public class ModifyProduct implements Initializable {
     /*The user will select a Part from the Selected Parts table and upon hitting the remove button, the selected part
     will be removed from the Selected Parts table.*/
     public void onRemovePartAction(ActionEvent actionEvent) {
-        Part partToRemove = (Part) SelectedPartsTable.getSelectionModel().getSelectedItem();
+        Part partToRemove = SelectedPartsTable.getSelectionModel().getSelectedItem();
         if (partToRemove == null) {
             Errors.alertError("Error", "Select a part","Select a part to remove from the product");
         } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to remove part from the product?");
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.OK) {
-                Product.deleteLinkedPart(partToRemove);
-                productParts.remove(partToRemove);
-                SelectedPartsTable.setItems(productParts);
+                productModify.deleteAssociatedPart(partToRemove);
+                associatedParts.remove(partToRemove);
+                SelectedPartsTable.setItems(associatedParts);
             }
         }
     }
@@ -133,21 +131,21 @@ public class ModifyProduct implements Initializable {
 
     /*Saving will parse the values from the Form and those values will be used to create a Part object. The inventory
      will be updated with the Modified part.*/
-    public void onSaveAction(ActionEvent actionEvent) {
+    public void onSaveAction(ActionEvent actionEvent) throws IOException {
+
         try {
-            int index = Inventory.getAllProducts().indexOf(productModify);
+
+            int index = Inventory.getAllProducts().indexOf(productModify); //get id not index, create setters
+
             int max = Integer.parseInt(MaxField.getText());
             int min = Integer.parseInt(MinField.getText());
             int inventory = Integer.parseInt(InvField.getText());
             double price = Double.parseDouble(PriceCostField.getText());
             int id = Integer.parseInt(IdField.getText());
             String name = NameField.getText();
-            boolean addPart = false;
-            if (Errors.checkInventory(min, max, inventory) && Errors.checkMinValue(min, max)) {
-                Product product = new Product(id, name, price, inventory, min, max);
-                Inventory.updateProduct(index, product);
-                addPart = true;
-            }
+
+            boolean addPart = true;
+
             if (addPart) {
                 Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
                 Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -155,9 +153,16 @@ public class ModifyProduct implements Initializable {
                 stage.setTitle("Modify Product");
                 stage.setScene(scene);
             }
+
+            Product modifyProduct = new Product(id, name, price, inventory, min, max);
+
+            modifyProduct.setAssociatedParts(associatedParts);
+
+            Inventory.updateProduct(index, modifyProduct);
+
         }
         catch (Exception e) {
-            Errors.alertError("Error", "Error Modifying Part", "Check that all fields are correctly filled and try again.");
+            //Errors.alertError("Error", "Error Modifying Part", "Check that all fields are correctly filled and try again.");
 
         }
 

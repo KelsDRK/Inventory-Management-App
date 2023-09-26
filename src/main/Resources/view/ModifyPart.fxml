@@ -25,11 +25,11 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
-        <RadioButton fx:id="InHouseRadioButton" layoutX="276.0" layoutY="50.0" mnemonicParsing="false" onAction="#inHouseRadioSelected" text="In-Hosue">
+        <RadioButton fx:id="InHouseRadioButton" layoutX="276.0" layoutY="50.0" mnemonicParsing="false" onAction="#InHouseRadio" text="In-Hosue">
          <toggleGroup>
             <ToggleGroup fx:id="tgroup" />
          </toggleGroup></RadioButton>
-        <RadioButton fx:id="OutsourcedRadioButton" layoutX="401.0" layoutY="50.0" mnemonicParsing="false" onAction="#outsourcedRadioSelected" text="Outsourced" toggleGroup="$tgroup" />
+        <RadioButton fx:id="OutsourcedRadioButton" layoutX="401.0" layoutY="50.0" mnemonicParsing="false" onAction="#OutsourcedRadio" text="Outsourced" toggleGroup="$tgroup" />
         <Button fx:id="SaveButton" layoutX="276.0" layoutY="377.0" mnemonicParsing="false" onAction="#onSaveAction" text="Save" />
         <Button fx:id="CancelButton" layoutX="375.0" layoutY="377.0" mnemonicParsing="false" onAction="#OnCancelAction" text="Cancel" />
     </children>

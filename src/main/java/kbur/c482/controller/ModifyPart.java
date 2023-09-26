@@ -32,24 +32,23 @@ public class ModifyPart implements Initializable {
     @FXML private TextField setTextForMachine;
 
     @FXML private Text MachIneOrCompLabel;
-    @FXML private Text inHouseOrCompany;
 
     @FXML public RadioButton InHouseRadioButton;
     @FXML public RadioButton OutsourcedRadioButton;
-
-    @FXML void inHouseRadioSelected(ActionEvent actionEvent) {
-        inHouseOrCompany.setText("Machine ID");
-    }
-    @FXML void outsourcedRadioSelected(ActionEvent actionEvent) {
-        inHouseOrCompany.setText("Company Name");
-    }
-
 
     private Part partModify;
     Inventory inventory = new Inventory();
 
 
 
+
+    public void InHouseRadio(ActionEvent actionEvent) {
+        MachIneOrCompLabel.setText("Machine ID");
+    }
+
+    public void OutsourcedRadio(ActionEvent actionEvent) {
+        MachIneOrCompLabel.setText("Company Name");
+    }
 
 
     /*Retrieves the Part we are modifying from the main menu and then initializes the Modify Part form based on the
@@ -60,6 +59,7 @@ public class ModifyPart implements Initializable {
 
 
         partModify = MainMenu.getTheModifyPart();
+
         IdField.setText(String.valueOf(partModify.getId()));
         NameField.setText(String.valueOf(partModify.getName()));
         InvField.setText(String.valueOf(partModify.getStock()));
@@ -70,14 +70,12 @@ public class ModifyPart implements Initializable {
         if (partModify instanceof InHousePart) {
             InHousePart modifyInHousePart = (InHousePart) partModify;
             InHouseRadioButton.setSelected(true);
-            OutsourcedRadioButton.setDisable(true);
             MachIneOrCompLabel.setText("Machine ID");
             setTextForMachine.setText(Integer.toString(modifyInHousePart.getMachineId()));
         }
         if (partModify instanceof OutsourcedPart) {
             OutsourcedPart modifyOutsourcedPart = (OutsourcedPart) partModify;
             OutsourcedRadioButton.setSelected(true);
-            InHouseRadioButton.setDisable(true);
             MachIneOrCompLabel.setText("Company ID");
             setTextForMachine.setText((modifyOutsourcedPart.getCompanyName()));
         }
@@ -86,6 +84,8 @@ public class ModifyPart implements Initializable {
 
 
     }
+
+
 
     /*Selecting the cancel option will prompt the user to confirm cancellation. If the user confirms then they will be
     * returned to the main menu. If a user does not confirm then they will continue the Modify Part form.*/
@@ -145,7 +145,7 @@ public class ModifyPart implements Initializable {
             }
         }
         catch (Exception e) {
-            Errors.alertError("Error", "Error Modifying Part", "Check that all fields are correctly filled and try again.");
+            Errors.alertError("Error", "Error Modifying Part", "Check that all fields are filled and try again. Machine ID only accepts characters 0-9.");
 
         }
 
@@ -160,5 +160,8 @@ public class ModifyPart implements Initializable {
 
 
     }
+
+
+
 }
 

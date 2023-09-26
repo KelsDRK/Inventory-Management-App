@@ -55,11 +55,17 @@ public class MainMenu implements Initializable {
     public Button ModifyProductsButton;
     public Button DeleteProductsButton;
 
+    //Value set during Part Modify button click
     private static Part partModify;
     public static Part getTheModifyPart () {return partModify;}
 
+
+
+    //Value gets set during Modify Product button click
     private static Product productModify;
     public static Product getProductModify () {return productModify;}
+
+    Inventory inv = new Inventory();
 
 
     /*Initializer is populated with the test data*/
@@ -114,6 +120,7 @@ public class MainMenu implements Initializable {
     }
 
 
+
     // OnAddProductClicked takes the user to the "Add Product" form.
     public void OnAddProductClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddProduct.fxml"));
@@ -136,7 +143,7 @@ public class MainMenu implements Initializable {
     /*Gets the Product that the user has selected and uses this data to populate the "Modify Product" screen.*/
     public void OnModifyProductsClicked(ActionEvent actionEvent) throws IOException {
 
-        productModify = (Product) ProductsTable.getSelectionModel().getSelectedItem();
+        productModify = ProductsTable.getSelectionModel().getSelectedItem();
 
         if (productModify == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -150,12 +157,18 @@ public class MainMenu implements Initializable {
             stage.setTitle("Modify Product");
             stage.setScene(scene);
         }
+
+
+
+
+
     }
 
     /*Gets the Part that the user has selected and uses this data to populate the "Modify Part" screen.*/
     public void OnModifyPartsClicked(ActionEvent actionEvent) throws IOException {
 
         partModify = PartsTable.getSelectionModel().getSelectedItem();
+
         if (partModify == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -179,7 +192,7 @@ public class MainMenu implements Initializable {
 
         ObservableList<Product> allProducts = Product.getAllProducts();
 
-        Product deleteProduct = (Product) ProductsTable.getSelectionModel().getSelectedItem();
+        Product deleteProduct = ProductsTable.getSelectionModel().getSelectedItem();
 
         if (deleteProduct == null)
             return;

@@ -12,7 +12,8 @@ public class Product extends Inventory {
     private int min;
     private int max;
 
-    private static ObservableList<Part> linkedParts = FXCollections.observableArrayList();
+    private  ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+    private  ObservableList<Part> bottomList = FXCollections.observableArrayList();
 
     public Product (int id, String name, double price, int stock, int min, int max) {
         this.id = id;
@@ -72,21 +73,28 @@ public class Product extends Inventory {
         this.max = max;
     }
 
-    public static ObservableList<Part> getLinkedParts() {
-        return linkedParts;
+    public ObservableList<Part> getAllAssociatedParts() {
+        return associatedParts;
     }
 
-    public void addLinkedParts(ObservableList<Part> part) {
-        this.linkedParts.addAll(part);
+    public void addAssociatedPart (Part part) {
+        this.associatedParts.add(part);
     }
 
-    public static boolean deleteLinkedPart(Part partToDelete) {
-        if (linkedParts.contains(partToDelete)) {
-            linkedParts.remove(partToDelete);
+    /*Sets associated parts list when modifying / adding products*/
+    public void setAssociatedParts (ObservableList<Part> parts) {
+        this.associatedParts = parts;
+    }
+
+    public  boolean deleteAssociatedPart(Part partToDelete) {
+        if (associatedParts.contains(partToDelete)) {
+            associatedParts.remove(partToDelete);
             return true;
         }
         else
             return false;
     }
+
+
 
 }
