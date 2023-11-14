@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.jar.Attributes;
 
 
 public class ModifyProduct implements Initializable {
@@ -49,15 +48,20 @@ public class ModifyProduct implements Initializable {
     @FXML Button CancelButton;
     @FXML Button SearchButton;
 
-    // observable lost of associated parts
+    /**
+     * observable lost of associated parts
+     */
     private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
-    //gets the product to be modified
+    /**
+     * gets the product to be modified
+     */
     private static Product productModify;
 
-
-    /*Retrieves the Product we are modifying from the main menu and then initializes the Modify Product form based on the
-     * information that the Product contains. ID Field is disabled.*/
+    /**
+     * Retrieves the Product we are modifying from the main menu and then initializes the Modify Product form based on the
+     * information that the Product contains. ID Field is disabled.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -88,11 +92,9 @@ public class ModifyProduct implements Initializable {
 
     }
 
-
-    /*The user will select a Part from the Parts table and upon hitting the add button, the selected part will be
-    * added to the Selected Parts table.*/
+    /** The user will select a Part from the Parts table and upon hitting the add button, the selected part will be
+      added to the Selected Parts table. */
     public void onAddAction(ActionEvent actionEvent) {
-
         Part addedToProduct = AllPartsTable.getSelectionModel().getSelectedItem();
 
         if (addedToProduct == null) {
@@ -104,10 +106,9 @@ public class ModifyProduct implements Initializable {
             associatedParts.add(addedToProduct);
             SelectedPartsTable.setItems(associatedParts);
         }
-
     }
 
-    /*The user will select a Part from the Selected Parts table and upon hitting the remove button, the selected part
+    /** The user will select a Part from the Selected Parts table and upon hitting the remove button, the selected part
     will be removed from the Selected Parts table.*/
     public void onRemovePartAction(ActionEvent actionEvent) {
         Part partToRemove = SelectedPartsTable.getSelectionModel().getSelectedItem();
@@ -124,7 +125,7 @@ public class ModifyProduct implements Initializable {
         }
     }
 
-    //String is passed as argument and function attempts to parse a Double.
+    /** String is passed as argument and function attempts to parse a Double. */
     private static boolean isDouble(String str){
         try{
             Double.parseDouble(str);
@@ -135,7 +136,7 @@ public class ModifyProduct implements Initializable {
         }
     }
 
-    //String is passed as an arguments and function attempts to parse an Integer.
+    /** String is passed as an arguments and function attempts to parse an Integer. */
     private static boolean isInteger(String str){
         try{
             Integer.parseInt(str);
@@ -147,11 +148,11 @@ public class ModifyProduct implements Initializable {
     }
 
 
-    /*In the beginning of this function the errors are being checked first. We start by checking if there are any empty
+    /** In the beginning of this function the errors are being checked first. We start by checking if there are any empty
     fields and returning the corresponding error message if so. Then we step through the individual fields to make sure
     they contain the correct value type (String, Integer, Double). After we are parsing the different fields of the
     AddProduct form and then using those values to create a new Product object. The Product and any associated parts
-     are then added to the Inventory.*/
+     are then added to the Inventory.
 
     // ********** RUNTIME ERROR **********
     // All Products Associated Parts list would be updated when only ONE was changed.
@@ -162,7 +163,7 @@ public class ModifyProduct implements Initializable {
     // ****** FUTURE ENHANCEMENT ******
     // In case of machine/company specific changes, Show Part Machine ID / Company Name inside Modify Product screen and
     // add Machine ID/Company Name into the search logic.
-    // This can allow changes to be made based on MachineID/Company Name if required in the future.
+    // This can allow changes to be made based on MachineID/Company Name if required in the future. */
 
     public void onSaveAction(ActionEvent actionEvent) throws IOException {
 
@@ -240,7 +241,7 @@ public class ModifyProduct implements Initializable {
 
     }
 
-    /*This is our list of errors we are using in the save function. Each error code corresponds to a different error for
+    /**This is our list of errors we are using in the save function. Each error code corresponds to a different error for
     ease of calling.*/
     private void showError(int errorCode){
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -291,7 +292,7 @@ public class ModifyProduct implements Initializable {
     }
 
 
-    /*Selecting the cancel option will prompt the user to confirm cancellation. If the user confirms then they will be
+    /**Selecting the cancel option will prompt the user to confirm cancellation. If the user confirms then they will be
      * returned to the main menu. If a user does not confirm then they will continue the Modify Product form.*/
     public void onCancelAction(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
@@ -302,11 +303,11 @@ public class ModifyProduct implements Initializable {
     }
 
 
-    /*OnSearchAction is storing the textField entry into a String variable called "q". We are creating a list using the
+    /** OnSearchAction is storing the textField entry into a String variable called "q". We are creating a list using the
     function we created earlier called searchByPartName with an argument of the textField "q". If the Observable list
     we have created "searchPart" is == o (a name was not passed therefor we will look for an Integer "id") we will
     try to parse the Integer from the String entered into the textField and use that Integer as an argument to call the
-    method "searchByPartID"*/
+    method "searchByPartID". */
     public void onSearchAction(ActionEvent actionEvent) {
         String q = SearchFieldText.getText();
 
@@ -333,9 +334,9 @@ public class ModifyProduct implements Initializable {
     }
 
 
-    /*SearchByPartID iterates through a list of "allParts". If the argument passed in "partId" matches the getter call
+    /** SearchByPartID iterates through a list of "allParts". If the argument passed in "partId" matches the getter call
     "part.getId" we return the Object (Part) otherwise we return null as are not interested in doing anything if there
-    is not a match.*/
+    is not a match. */
     private Part searchByPartID (int partId) {
         ObservableList<Part> allParts = Part.getAllParts();
 
@@ -350,9 +351,9 @@ public class ModifyProduct implements Initializable {
     }
 
 
-    /*SearchByPartName is going to take in a String "partialName" and compare it to Part objects in the list
+    /** SearchByPartName is going to take in a String "partialName" and compare it to Part objects in the list
     "allParts" using the "getName" function from the class "Parts". If there is a match then it will return the
-    observable list  with the included Part (partialName) that we are looking at for comparison.*/
+    observable list  with the included Part (partialName) that we are looking at for comparison. */
     private ObservableList<Part> searchByPartName (String partialName) {
         ObservableList<Part> namedPart = FXCollections.observableArrayList();
 
@@ -363,7 +364,6 @@ public class ModifyProduct implements Initializable {
                 namedPart.add(p);
             }
         }
-
         return namedPart;
     }
 }

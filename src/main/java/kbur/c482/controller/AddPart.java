@@ -37,13 +37,16 @@ public class AddPart implements Initializable {
 
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
 
+    /** Creates new Inventory Object. */
     Inventory inv = new Inventory();
+
+    /** Creates new Random Object. */
     Random random = new Random();
 
 
 
 
-    //setting an empty initializer where the ID field will be disabled and a random ID will be generated.
+    /** setting an empty initializer where the ID field will be disabled and a random ID will be generated. */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         IdField.setDisable(true);
@@ -51,7 +54,7 @@ public class AddPart implements Initializable {
 
     }
 
-    //this function is the logic behind getting the random ID used in the initializer.
+    /** this function is the logic behind getting the random ID used in the initializer. */
     public String getNewPartID() {
         int partID = random.nextInt();
         boolean partFound = false;
@@ -62,7 +65,7 @@ public class AddPart implements Initializable {
         return Integer.toString(partID);
     }
 
-    //This function will change the Text of the Machine ID/ Company name field when the related Radio button is selected.
+    /** This function will change the Text of the Machine ID/ Company name field when the related Radio button is selected. */
     public void radioFunction(ActionEvent actionEvent) {
         if (OutsourcedRadioButton.isSelected())
             inHouseOrCompany.setText("Company Name");
@@ -71,7 +74,7 @@ public class AddPart implements Initializable {
         }
     }
 
-    //A function to determine if a String value is a double.
+    /** A function to determine if a String value is a double. */
     private static boolean isDouble(String str){
         try{
             Double.parseDouble(str);
@@ -82,7 +85,7 @@ public class AddPart implements Initializable {
         }
     }
 
-    //A function to determine if a string value is an Integer.
+    /** A function to determine if a string value is an Integer. */
     private static boolean isInteger(String str){
         try{
             Integer.parseInt(str);
@@ -93,7 +96,7 @@ public class AddPart implements Initializable {
         }
     }
 
-    /*In the beginning of this function the errors are being checked first. We start by checking if there are any empty
+    /** In the beginning of this function the errors are being checked first. We start by checking if there are any empty
     fields and returning the corresponding error message if so. Then we step through the individual fields to make sure
     they contain the correct value type (String, Integer, Double). After we are parsing the different fields of the
     AddPart form and then using those values to create a new Part object. If the In-House Radio button is selected the
@@ -203,7 +206,7 @@ public class AddPart implements Initializable {
         }
     }
 
-   /*This is our list of errors we are using in the save function. Each error code corresponds to a different error for
+   /** This is our list of errors we are using in the save function. Each error code corresponds to a different error for
     ease of calling.*/
    private void showError(int errorCode){
        Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -254,7 +257,7 @@ public class AddPart implements Initializable {
    }
 
 
-    /*If the user selects the "Cancel" option then they will be returned to the main menu*/
+    /** If the user selects the "Cancel" option then they will be returned to the main menu. */
     public void OnCancelAction (ActionEvent actionEvent) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

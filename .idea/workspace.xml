@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ec42dae-2579-4d4f-9218-2d0835e74e1d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resources/view/ModifyPart.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/ModifyPart.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resources/view/ModifyProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/ModifyProduct.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddPart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/MainMenu.java" afterDir="false" />
@@ -17,6 +15,9 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Errors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Errors.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/model/InHousePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/InHousePart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/model/OutsourcedPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/OutsourcedPart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Part.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Part.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Product.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,15 +65,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/kelst/Desktop/Projects/c482/src/main/View/kbur/c482/view&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kelst/Desktop/Projects/c482/src/main/View/kbur/c482/CreateMainMenu.fxml&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_directory_selection": "C:/Users/kelst/Desktop/Projects/c482/src/main/View/kbur/c482/view",
+    "last_opened_file_path": "C:/Users/kelst/Desktop",
+    "settings.editor.selected.configurable": "preferences.JavaFX"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kelst\Desktop\Projects\c482\src\main\View\kbur\c482" />
@@ -163,7 +164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695695792655</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Main">
+      <created>1699976459622</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1699976459622</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

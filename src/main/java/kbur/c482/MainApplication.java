@@ -17,16 +17,20 @@ public class MainApplication extends Application {
         stage.show();
     }
 
-    // ********** RUNTIME ERROR **********
-    // All Products Associated Parts list would be updated when only ONE was changed.
-    // SOLUTION: Used getters to "get" a specific associated part from a "productmodify". The "productmodify" is a
-    // product with its own associated parts list and not a universal parts list. I could then "get" the parts from the
-    // product specific list.
-
-    // ****** FUTURE ENHANCEMENT ******
-    // In case of machine/company specific changes, Show Part Machine ID / Company Name inside Modify Product screen and
-    // add Machine ID/Company Name into the search logic.
-    // This can allow changes to be made based on MachineID/Company Name if required in the future.
+    /**
+     * RUNTIME ERROR:
+     * All Products Associated Parts list would be updated when only ONE was changed.
+     * SOLUTION: Used getters to "get" a specific associated part from a "productmodify". The "productmodify" is a
+     * product with its own associated parts list and not a universal parts list. I could then "get" the parts from the
+     * product specific list.
+     *
+     * FUTURE ENHANCEMENT:
+     * In case of machine/company specific changes, Show Part Machine ID / Company Name inside Modify Product screen and
+     * add Machine ID/Company Name into the search logic.
+     * This can allow changes to be made based on MachineID/Company Name if required in the future.
+     *
+     * JAVADOCS ARE LOCATED INSIDE OF index.HTML file
+     */
 
     public static void main(String[] args) {
         launch();

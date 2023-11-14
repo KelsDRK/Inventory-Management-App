@@ -52,6 +52,7 @@ public class AddProduct implements Initializable {
     @FXML Button CancelButton;
     @FXML Button SearchButton;
 
+    /** Creates new Random Object. */
     Random random = new Random();
 
     private static Part partModify;
@@ -63,8 +64,8 @@ public class AddProduct implements Initializable {
 
 
 
-    /*The Initializer will be created with empty Fields for the user to input data. The ID field will also be Disabled
-    * and a Random ID will be generated for the user*/
+    /** The Initializer will be created with empty Fields for the user to input data. The ID field will also be Disabled
+     and a Random ID will be generated for the user*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -86,7 +87,7 @@ public class AddProduct implements Initializable {
 
     }
 
-    //this function is the logic behind getting the random ID used in the initializer.
+    /** this function is the logic behind getting the random ID used in the initializer. */
     public String getNewPartID() {
         int productId = random.nextInt();
         boolean partFound = false;
@@ -97,7 +98,7 @@ public class AddProduct implements Initializable {
         return Integer.toString(productId);
     }
 
-    /*If the user selects the "Cancel" option then they will be returned to the main menu*/
+    /** If the user selects the "Cancel" option then they will be returned to the main menu. */
     public void OnCancelAction(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
@@ -107,9 +108,9 @@ public class AddProduct implements Initializable {
     }
 
 
-    /*The search function will place the Information placed into the search text field into a variable "q". It will
-    * create a list of results from the function "searchByPartName" which will be discussed further down. If there are
-    * no results for searching by name, then the function will try searching by ID*/
+    /** The search function will place the Information placed into the search text field into a variable "q". It will
+    create a list of results from the function "searchByPartName" which will be discussed further down. If there are
+    no results for searching by name, then the function will try searching by ID. */
     public void onSearchAction(ActionEvent actionEvent) {
 
         String q = SearchFieldText.getText();
@@ -134,9 +135,8 @@ public class AddProduct implements Initializable {
         AllPartsTable.setItems(searchedPart);
     }
 
-    /*The logic used to search by a parts ID
-    * We will iterate through the list of Parts and crosscheck their ID with the ID provided in the search.
-    * */
+    /** The logic used to search by a parts ID
+    We will iterate through the list of Parts and crosscheck their ID with the ID provided in the search. */
     private Part searchByPartID (int partId) {
         ObservableList<Part> allParts = Part.getAllParts();
 
@@ -150,8 +150,8 @@ public class AddProduct implements Initializable {
         return null;
     }
 
-    /*Creates a list of Parts that include a partial match of whatever is entered into the search. If there is a match
-    * then it will be placed into the "Named Part" list and the list will be returned.*/
+    /** Creates a list of Parts that include a partial match of whatever is entered into the search. If there is a match
+     then it will be placed into the "Named Part" list and the list will be returned. */
     private ObservableList<Part> searchByPartName (String partialName) {
         ObservableList<Part> namedPart = FXCollections.observableArrayList();
 
@@ -166,8 +166,8 @@ public class AddProduct implements Initializable {
         return namedPart;
     }
 
-    /*This function places Parts from the Global Parts list into a list of Selected Parts that the Product needs.
-    * The selected Part will be added to a list "Product Parts" and that list will populate the Selected Parts Table*/
+    /** This function places Parts from the Global Parts list into a list of Selected Parts that the Product needs.
+    * The selected Part will be added to a list "Product Parts" and that list will populate the Selected Parts Table.*/
     public void onAddButtonAction(ActionEvent actionEvent) throws IOException {
 
         Part addedToProduct = (Part) AllPartsTable.getSelectionModel().getSelectedItem();
@@ -184,8 +184,8 @@ public class AddProduct implements Initializable {
 
     }
 
-    /*This function highlights the item that the user has selected and then removes that item from the list "Product
-    * Parts". The Selected Parts Table is then populated with whatever items are left in the Product Parts list*/
+    /**This function highlights the item that the user has selected and then removes that item from the list "Product
+    * Parts". The Selected Parts Table is then populated with whatever items are left in the Product Parts list.*/
     public void onRemoveAssociatedAction(ActionEvent actionEvent) {
 
         partModify = SelectedPartsTable.getSelectionModel().getSelectedItem();
@@ -205,7 +205,7 @@ public class AddProduct implements Initializable {
 
     }
 
-    //String is passed as argument and function attempts to parse a Double.
+    /**String is passed as argument and function attempts to parse a Double. */
     private static boolean isDouble(String str){
         try{
             Double.parseDouble(str);
@@ -216,7 +216,7 @@ public class AddProduct implements Initializable {
         }
     }
 
-    //String is passed as an arguments and function attempts to parse an Integer.
+    /**String is passed as an arguments and function attempts to parse an Integer. */
     private static boolean isInteger(String str){
         try{
             Integer.parseInt(str);
@@ -227,7 +227,7 @@ public class AddProduct implements Initializable {
         }
     }
 
-    /*In the beginning of this function the errors are being checked first. We start by checking if there are any empty
+    /**In the beginning of this function the errors are being checked first. We start by checking if there are any empty
     fields and returning the corresponding error message if so. Then we step through the individual fields to make sure
     they contain the correct value type (String, Integer, Double). After we are parsing the different fields of the
     AddProduct form and then using those values to create a new Product object. The Product and any associated parts
@@ -297,7 +297,7 @@ public class AddProduct implements Initializable {
 
     }
 
-    /*This is our list of errors we are using in the save function. Each error code corresponds to a different error for
+    /**This is our list of errors we are using in the save function. Each error code corresponds to a different error for
     ease of calling.*/
     private void showError(int errorCode){
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -346,7 +346,5 @@ public class AddProduct implements Initializable {
         }
         alert.showAndWait();
     }
-
-
 
 }

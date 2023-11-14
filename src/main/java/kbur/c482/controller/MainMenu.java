@@ -55,18 +55,21 @@ public class MainMenu implements Initializable {
 
     //Value set during Part Modify button click
     private static Part partModify;
+    /** Value for ModifyPart is stored here. */
     public static Part getTheModifyPart () {return partModify;}
 
 
 
     //Value gets set during Modify Product button click
     private static Product productModify;
+    /** Getter for Modify Product. */
     public static Product getProductModify () {return productModify;}
 
+    /** Creates new Inventory Object. */
     Inventory inv = new Inventory();
 
 
-    /*Initializer is populated with the test data*/
+    /** Initializer is populated with the test data. */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -87,11 +90,11 @@ public class MainMenu implements Initializable {
         ProductsTable.setItems(products);
     }
 
-    /* firstTest protects the initializer from duplicating data upon return to the main screen from a different screen.
+    /** firstTest protects the initializer from duplicating data upon return to the main screen from a different screen.
     */
     private static boolean firstTest = true;
 
-    /*Adds data to use for testing functionality in the program.*/
+    /** Adds data to use for testing functionality in the program.*/
     private void addTestData () {
 
         if(!firstTest) {
@@ -119,7 +122,7 @@ public class MainMenu implements Initializable {
 
 
 
-    // OnAddProductClicked takes the user to the "Add Product" form.
+    /** OnAddProductClicked takes the user to the "Add Product" form. */
     public void OnAddProductClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddProduct.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
@@ -128,7 +131,7 @@ public class MainMenu implements Initializable {
         stage.setScene(scene);
     }
 
-    // OnAddPartsClicked takes the user to the "Add part" form.
+    /** OnAddPartsClicked takes the user to the "Add part" form. */
     public void OnAddPartClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddPart.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
@@ -136,7 +139,7 @@ public class MainMenu implements Initializable {
         stage.setScene(scene);
     }
 
-    /* Stores the Product that the user has selected into productModify. If no products are selected then error
+    /** Stores the Product that the user has selected into productModify. If no products are selected then error
     * will show. */
     public void OnModifyProductsClicked(ActionEvent actionEvent) throws IOException {
 
@@ -156,8 +159,8 @@ public class MainMenu implements Initializable {
         }
     }
 
-    /*Gets the Part that the user has selected and uses this data to populate the "Modify Part" form. If no part
-    * is selected then error will be shown*/
+    /** Gets the Part that the user has selected and uses this data to populate the "Modify Part" form. If no part
+    * is selected then error will be shown. */
     public void OnModifyPartsClicked(ActionEvent actionEvent) throws IOException {
 
         partModify = PartsTable.getSelectionModel().getSelectedItem();
@@ -177,7 +180,7 @@ public class MainMenu implements Initializable {
     }
 
 
-    /* OnDeleteProductsClicked will look to see if there has been an object "Product" selected. If a Product has been
+    /** OnDeleteProductsClicked will look to see if there has been an object "Product" selected. If a Product has been
     selected we will remove the Product from the list of allProducts. If a Part has not been selected then nothing
     will happen.
      */
@@ -210,7 +213,7 @@ public class MainMenu implements Initializable {
 
     }
 
-    /* OnDeletePartsClicked will look to see if there has been an object "Part" selected. If a Part has been selected
+    /** OnDeletePartsClicked will look to see if there has been an object "Part" selected. If a Part has been selected
     then we will remove the Part from the list of allParts. If a Part has not been selected then nothing will happen.
      */
     public void OnDeletePartsClicked(ActionEvent actionEvent) {
@@ -236,7 +239,7 @@ public class MainMenu implements Initializable {
         }
     }
 
-    //  OnExitButtonClicked closes the program window after clicking the button "Exit"
+    /**  OnExitButtonClicked closes the program window after clicking the button "Exit". */
     public void OnExitButtonClicked(ActionEvent actionEvent) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -254,7 +257,7 @@ public class MainMenu implements Initializable {
     }
 
 
-    /*SearchByPartName is going to take in a String "partialName" and compare it to Part objects in the list
+    /** SearchByPartName is going to take in a String "partialName" and compare it to Part objects in the list
     "allParts" using the "getName" function from the class "Parts". If there is a match then it will return the
     observable list  with the included Part (partialName) that we are looking at for comparison.
      */
@@ -273,7 +276,7 @@ public class MainMenu implements Initializable {
     }
 
 
-    /*SearchByProductName is going to take in a String "partialName" and compare it to Product objects in the list
+    /** SearchByProductName is going to take in a String "partialName" and compare it to Product objects in the list
     "allProducts" using the "getName" function from the class "Products".If there is a match then it will return the
     observable list  with the included Product (partialName) that we are looking at for comparison.
      */
@@ -292,7 +295,7 @@ public class MainMenu implements Initializable {
     }
 
 
-    /*SearchByPartsID iterates through a list of "allParts". If the argument passed in "partId" matches the getter call
+    /** SearchByPartsID iterates through a list of "allParts". If the argument passed in "partId" matches the getter call
     "part.getId" we return the Object (Part) otherwise we return null as are not interested in doing anything if there
     is not a match.
      */
@@ -310,7 +313,7 @@ public class MainMenu implements Initializable {
     }
 
 
-    /*SearchByProductID iterates through a list of "allProducts". If the argument passed in "productId" matches the
+    /** SearchByProductID iterates through a list of "allProducts". If the argument passed in "productId" matches the
     getter call "product.getId" we return the Object (Product) otherwise we return null as are not interested in doing
     anything if there is not a match.
      */
@@ -327,11 +330,11 @@ public class MainMenu implements Initializable {
         return null;
     }
 
-    /*OnPartSearch is storing the textField entry into a String variable called "q". We are creating a list using the
+    /** OnPartSearch is storing the textField entry into a String variable called "q". We are creating a list using the
     function we created earlier called searchByPartName with an argument of the textField "q". If the Observable list
     we have created "searchPart" is == o (a name was not passed therefor we will look for an Integer "id") we will
     try to parse the Integer from the String entered into the textField and use that Integer as an argument to call the
-    method "searchByPartID"
+    method "searchByPartID".
      */
     public void OnPartSearch(ActionEvent actionEvent) {
 
@@ -361,11 +364,11 @@ public class MainMenu implements Initializable {
         PartsTable.setItems(searchedPart);
     }
 
-    /*OnProductSearch is storing the textField entry into a String variable called "q". We are creating a list using
+    /** OnProductSearch is storing the textField entry into a String variable called "q". We are creating a list using
     the function we created earlier called searchByProductName with an argument of the textField "q". If the Observable
     list we have created "searchProduct" is == o (a name was not passed therefor we will look for an Integer "id") we
     will try to parse the Integer from the String entered into the textField and use that Integer as an argument to call
-     the method "searchByProductID"
+     the method "searchByProductID".
      */
     public void OnProductSearch(ActionEvent actionEvent) {
 

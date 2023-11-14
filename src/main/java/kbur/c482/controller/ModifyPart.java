@@ -37,22 +37,24 @@ public class ModifyPart implements Initializable {
     @FXML public RadioButton OutsourcedRadioButton;
 
     private Part partModify;
+
+    /** Creates new Inventory Object. */
     Inventory inventory = new Inventory();
 
 
 
-    //If In-House Label is selected then Machine ID will be prompted.
+    /** If In-House Label is selected then Machine ID will be prompted. */
     public void InHouseRadio(ActionEvent actionEvent) {
         MachIneOrCompLabel.setText("Machine ID");
     }
 
-    //If Outsourced label is selected then Company Name will be prompted.
+    /** If Outsourced label is selected then Company Name will be prompted. */
     public void OutsourcedRadio(ActionEvent actionEvent) {
         MachIneOrCompLabel.setText("Company Name");
     }
 
 
-    /*Retrieves the Part we are modifying from the main menu and then initializes the Modify Part form based on the
+    /** Retrieves the Part we are modifying from the main menu and then initializes the Modify Part form based on the
     * information that the Part contains. InHouse parts will have a machine ID. Outsourced parts
     * will have a company name. ID Field is disabled.*/
 
@@ -87,7 +89,7 @@ public class ModifyPart implements Initializable {
 
     }
 
-    //String is passed as argument and function attempts to parse a Double.
+    /** String is passed as argument and function attempts to parse a Double. */
     private static boolean isDouble(String str){
         try{
             Double.parseDouble(str);
@@ -98,7 +100,7 @@ public class ModifyPart implements Initializable {
         }
     }
 
-    //String is passed as an arguments and function attempts to parse an Integer.
+    /** String is passed as an arguments and function attempts to parse an Integer. */
     private static boolean isInteger(String str){
         try{
             Integer.parseInt(str);
@@ -111,7 +113,7 @@ public class ModifyPart implements Initializable {
 
 
 
-    /*Selecting the cancel option will prompt the user to confirm cancellation. If the user confirms then they will be
+    /** Selecting the cancel option will prompt the user to confirm cancellation. If the user confirms then they will be
     * returned to the main menu. If a user does not confirm then they will continue the Modify Part form.*/
     public void OnCancelAction(ActionEvent actionEvent) throws IOException {
 
@@ -134,7 +136,7 @@ public class ModifyPart implements Initializable {
     }
 
 
-    /*In the beginning of this function the errors are being checked first. We start by checking if there are any empty
+    /** In the beginning of this function the errors are being checked first. We start by checking if there are any empty
     fields and returning the corresponding error message if so. Then we step through the individual fields to make sure
     they contain the correct value type (String, Integer, Double). After we are parsing the different fields of the
     AddPart form and then using those values to create a new Part object. If the In-House Radio button is selected the
@@ -229,7 +231,7 @@ public class ModifyPart implements Initializable {
 
 
     }
-    /*This is our list of errors we are using in the save function. Each error code corresponds to a different error for
+    /** This is our list of errors we are using in the save function. Each error code corresponds to a different error for
     ease of calling.*/
     private void showError(int errorCode){
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -278,8 +280,6 @@ public class ModifyPart implements Initializable {
         }
         alert.showAndWait();
     }
-
-
 
 }
 
