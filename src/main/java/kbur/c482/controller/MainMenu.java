@@ -16,14 +16,12 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import kbur.c482.model.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 
@@ -132,15 +130,14 @@ public class MainMenu implements Initializable {
 
     // OnAddPartsClicked takes the user to the "Add part" form.
     public void OnAddPartClicked(ActionEvent actionEvent) throws IOException {
-
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddPart.fxml"));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1000, 500);
         stage.setScene(scene);
-
     }
 
-    /*Gets the Product that the user has selected and uses this data to populate the "Modify Product" screen.*/
+    /* Stores the Product that the user has selected into productModify. If no products are selected then error
+    * will show. */
     public void OnModifyProductsClicked(ActionEvent actionEvent) throws IOException {
 
         productModify = ProductsTable.getSelectionModel().getSelectedItem();
@@ -157,14 +154,10 @@ public class MainMenu implements Initializable {
             stage.setTitle("Modify Product");
             stage.setScene(scene);
         }
-
-
-
-
-
     }
 
-    /*Gets the Part that the user has selected and uses this data to populate the "Modify Part" screen.*/
+    /*Gets the Part that the user has selected and uses this data to populate the "Modify Part" form. If no part
+    * is selected then error will be shown*/
     public void OnModifyPartsClicked(ActionEvent actionEvent) throws IOException {
 
         partModify = PartsTable.getSelectionModel().getSelectedItem();
@@ -197,18 +190,24 @@ public class MainMenu implements Initializable {
         if (deleteProduct == null)
             return;
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.initModality(Modality.NONE);
-        alert.setTitle("Confirmation ");
-        alert.setHeaderText("Confirm Delete!");
-        alert.setContentText("Are you sure you want to delete?");
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.get() == ButtonType.OK) {
-            allProducts.remove(deleteProduct);
-        } else {
-            System.out.println("You clicked cancel. Please complete form.");
+        if (deleteProduct.getAllAssociatedParts().size() > 0) {
+            Errors.alertError("Error", "Cannot Delete Product", "Product has part assigned to it and cannot be deleted.");
         }
+        else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Confirmation ");
+            alert.setHeaderText("Confirm Delete!");
+            alert.setContentText("Are you sure you want to delete?");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() == ButtonType.OK) {
+                allProducts.remove(deleteProduct);
+            } else {
+                System.out.println("You clicked cancel. Please complete form.");
+            }
+        }
+
     }
 
     /* OnDeletePartsClicked will look to see if there has been an object "Part" selected. If a Part has been selected
@@ -307,7 +306,6 @@ public class MainMenu implements Initializable {
                 return part;
             }
         }
-
         return null;
     }
 
@@ -319,7 +317,6 @@ public class MainMenu implements Initializable {
     private Product searchByProductID (int productId) {
         ObservableList<Product> allProducts = Product.getAllProducts();
 
-
         for (int i = 0; i < allProducts.size(); i++) {
             Product product = allProducts.get(i);
 
@@ -327,7 +324,6 @@ public class MainMenu implements Initializable {
                 return product;
             }
         }
-
         return null;
     }
 
@@ -352,16 +348,16 @@ public class MainMenu implements Initializable {
                 if (part != null)
                     searchedPart.add(part);
             }
-
             catch (NumberFormatException e) {
+
+                PartsTable.setItems(searchedPart);
+
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setContentText("No Product found.. Try another search.");
+                alert.setContentText("No Product found.. Press the Search button to repopulate table.");
                 alert.showAndWait();
-
             }
         }
-
         PartsTable.setItems(searchedPart);
     }
 
@@ -379,8 +375,6 @@ public class MainMenu implements Initializable {
 
         searchProducts.clear();
 
-
-
         if (searchedProduct.size() == 0) {
             try {
                 int productId = Integer.parseInt(q);
@@ -388,18 +382,13 @@ public class MainMenu implements Initializable {
                 if (product != null)
                     searchedProduct.add(product);
             }
-
             catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setContentText("No Product found.. Try another search.");
+                alert.setContentText("No Product found.. Press the Search button to repopulate table.");
                 alert.showAndWait();
-
             }
-
         }
-
-
         ProductsTable.setItems(searchedProduct);
     }
 

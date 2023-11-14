@@ -18,6 +18,7 @@ import kbur.c482.model.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -194,18 +195,78 @@ public class AddProduct implements Initializable {
             alert.setContentText("No part selected, Choose a part from the table to modify.");
             alert.showAndWait();
         } else {
-            associatedParts.remove(partModify);
-            SelectedPartsTable.setItems(associatedParts);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to remove part from the product?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.isPresent() && result.get() == ButtonType.OK) {
+                associatedParts.remove(partModify);
+                SelectedPartsTable.setItems(associatedParts);
+            }
         }
 
     }
 
-    /*This function is parsing values from the form to use as arguments to create a new Product Object. "Linked Parts"
-    * (parts moved to the Selected Parts table during creation of the Product) are also saved. The new Product Object
-    * is added to Inventory.*/
-    public void onSaveAction(ActionEvent actionEvent) {
-        try {
+    //String is passed as argument and function attempts to parse a Double.
+    private static boolean isDouble(String str){
+        try{
+            Double.parseDouble(str);
+            return true;
+        }
+        catch(NumberFormatException e) {
+            return false;
+        }
+    }
 
+    //String is passed as an arguments and function attempts to parse an Integer.
+    private static boolean isInteger(String str){
+        try{
+            Integer.parseInt(str);
+            return true;
+        }
+        catch(NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /*In the beginning of this function the errors are being checked first. We start by checking if there are any empty
+    fields and returning the corresponding error message if so. Then we step through the individual fields to make sure
+    they contain the correct value type (String, Integer, Double). After we are parsing the different fields of the
+    AddProduct form and then using those values to create a new Product object. The Product and any associated parts
+     are then added to the Inventory.*/
+    public void onSaveAction(ActionEvent actionEvent) {
+
+        if (NameField.getText().trim().isEmpty() || PriceField.getText().trim().isEmpty() ||
+                InvField.getText().trim().isEmpty() || MaxField.getText().trim().isEmpty() ||
+                MinField.getText().trim().isEmpty()) {
+            showError(1);
+            return;
+
+        }
+
+        if ((!isDouble(PriceField.getText().trim()) || (Double.parseDouble(PriceField.getText().trim())) <= 0)){
+            showError(3);
+            return;
+        }
+
+        if ((!isInteger(MinField.getText().trim()) || (Integer.parseInt(MinField.getText().trim())) <= 0)){
+            showError(4);
+            return;
+        }
+        if ((!isInteger(MaxField.getText().trim()) || (Integer.parseInt(MaxField.getText().trim())) < Integer.parseInt(MinField.getText().trim()))){
+
+            showError(5);
+            return;
+        }
+        if (!isInteger(InvField.getText().trim())){
+            showError(6);
+            return;
+        }
+        if ((Integer.parseInt(InvField.getText().trim()) > Integer.parseInt(MaxField.getText().trim())) ||
+                (Integer.parseInt(InvField.getText().trim()) < Integer.parseInt(MinField.getText().trim()))){
+            showError(7);
+            return;
+        }
+
+        try {
             int max = Integer.parseInt(MaxField.getText());
             int min = Integer.parseInt(MinField.getText());
             int inventory = Integer.parseInt(InvField.getText());
@@ -215,7 +276,7 @@ public class AddProduct implements Initializable {
 
             boolean addPart = false;
 
-            if (Errors.checkInventory(min, max, inventory) && Errors.checkMinValue(min, max)) {
+            if (Errors.checkMinValue(min, max) && Errors.checkInventory(min, max, inventory)) {
                 Product newProduct = new Product(id, name, price, inventory, min, max);
                 newProduct.setAssociatedParts(SelectedPartsTable.getItems());
                 Inventory.addProduct(newProduct);
@@ -234,6 +295,56 @@ public class AddProduct implements Initializable {
         }
 
 
+    }
+
+    /*This is our list of errors we are using in the save function. Each error code corresponds to a different error for
+    ease of calling.*/
+    private void showError(int errorCode){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("ERROR!");
+
+        if (errorCode == 1){
+            //all fields required
+            alert.setHeaderText("Missing Fields");
+            alert.setContentText("All Fields Are Required.");
+        }
+
+        if (errorCode == 2){
+            // machine ID error
+            alert.setHeaderText("Machine ID Error");
+            alert.setContentText("Machine ID must be an Integer. Ex: 25");
+        }
+
+        if (errorCode == 3){
+            //price error
+            alert.setHeaderText("Invalid Price");
+            alert.setContentText("Price must be number greater than 0 (Ex: 2.99)");
+        }
+
+        if (errorCode == 4){
+            //min error
+            alert.setHeaderText("Min Error");
+            alert.setContentText("Min must be an integer greater than 0");
+        }
+
+        if (errorCode == 5){
+            //max error
+            alert.setHeaderText("Max Error");
+            alert.setContentText("Max must be an integer greater than or equal to the Min.");
+        }
+
+        if (errorCode == 6){
+            //inv error
+            alert.setHeaderText("Inv Error");
+            alert.setContentText("The current Inv must be an Integer. Ex: 25");
+        }
+
+        if (errorCode == 7){
+            //inv out of min max range
+            alert.setHeaderText("Inv out of range Error");
+            alert.setContentText("The current Inv must be between the min and max.");
+        }
+        alert.showAndWait();
     }
 
 

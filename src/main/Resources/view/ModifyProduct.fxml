@@ -12,7 +12,6 @@
                 <TableColumn fx:id="PartNameColumn" prefWidth="75.0" text="Part Name" />
                 <TableColumn fx:id="InvLevelColumn" prefWidth="106.0" text="Inventory Level" />
                 <TableColumn fx:id="PriceColumn" prefWidth="137.0" text="Price/ Cost Per Unit" />
-                <TableColumn prefWidth="106.0" text="Inventory Level" />
             </columns>
         </TableView>
         <TextField fx:id="SearchFieldText" layoutX="805.0" layoutY="31.0" prefHeight="25.0" prefWidth="158.0" promptText="Search by Part ID or Name" />

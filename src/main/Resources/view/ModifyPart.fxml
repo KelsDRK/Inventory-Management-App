@@ -18,7 +18,7 @@
         <Text layoutX="182.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max" />
         <TextField fx:id="MinField" layoutX="495.0" layoutY="256.0" />
         <Text layoutX="444.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min" />
-        <TextField fx:id="setTextForMachine" layoutX="276.0" layoutY="288.0" />
+        <TextField fx:id="MachineID" layoutX="276.0" layoutY="288.0" />
         <Text fx:id="MachIneOrCompLabel" layoutX="182.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Machine ID" />
         <Text layoutX="168.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modify Part">
             <font>

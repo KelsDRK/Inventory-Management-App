@@ -81,12 +81,13 @@ public class Product extends Inventory {
         this.associatedParts.add(part);
     }
 
-    /*Sets associated parts list when modifying / adding products*/
+    /*Sets associated parts list when modifying / adding products to the List that is passed in.*/
     public void setAssociatedParts (ObservableList<Part> parts) {
         this.associatedParts = parts;
     }
 
-    public  boolean deleteAssociatedPart(Part partToDelete) {
+    //will delete any parts associated with the product
+    public boolean deleteAssociatedPart(Part partToDelete) {
         if (associatedParts.contains(partToDelete)) {
             associatedParts.remove(partToDelete);
             return true;

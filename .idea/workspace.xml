@@ -4,15 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ec42dae-2579-4d4f-9218-2d0835e74e1d" name="Changes" comment="Main">
+    <list default="true" id="5ec42dae-2579-4d4f-9218-2d0835e74e1d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Resources/view/ModifyPart.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/ModifyPart.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/view/ModifyProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/view/ModifyProduct.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddPart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/AddProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyPart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/controller/ModifyProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Errors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Errors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/model/InHousePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/InHousePart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kbur/c482/model/Product.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -152,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695380333900</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Main">
+      <created>1695695792655</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1695695792655</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

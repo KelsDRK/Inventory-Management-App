@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 
 public class Errors {
 
+    //checks that min value is greater than0 and less than max
     public static boolean checkMinValue (int min, int max) {
         boolean checkMin = true;
         if (min <= 0  || min >= max) {
@@ -13,14 +14,16 @@ public class Errors {
         return checkMin;
     }
 
-    public static void alertError(String alertTitle, String alertHeader, String alertContent){
+    //An alert error that we can use to write custom alerts
+    public static void alertError(String Title, String Header, String Content){
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(alertTitle);
-        alert.setHeaderText(alertHeader);
-        alert.setContentText(alertContent);
+        alert.setTitle(Title);
+        alert.setHeaderText(Header);
+        alert.setContentText(Content);
         alert.showAndWait();
     }
 
+    //checks that inventory is less than max and greater than min
     public static boolean checkInventory (int min, int max, int inv) {
         boolean checkInventory = true;
         if (inv > max || inv < min) {
