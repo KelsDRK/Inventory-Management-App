@@ -1,5 +1,4 @@
-# Sotware1_Project
-Inventory Management System
+# Inventory Management System
 
 --------
 SCENARIO
